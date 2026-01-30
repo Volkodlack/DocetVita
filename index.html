@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocEtVita - Externalisation Administrative pour Professionnels de Santé</title>
+    <title>DocEtVita - Externalisation Administrative Santé</title>
+    <link rel="icon" type="image/png" href="/mnt/user-data/uploads/LOGO.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -64,45 +65,22 @@
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 1.2rem 3rem;
+            padding: 0.8rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo-nav {
+            height: 70px;
             display: flex;
             align-items: center;
-            gap: 1rem;
         }
 
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--sage-green);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .logo-icon::before {
-            content: "📄";
-            font-size: 24px;
-            filter: grayscale(1) brightness(2);
-        }
-
-        .logo-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--dark-navy);
-        }
-
-        .logo-text .vita {
-            color: var(--sage-green);
+        .logo-nav img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
         }
 
         .nav-links {
@@ -144,7 +122,7 @@
             position: relative;
             overflow: hidden;
             background: linear-gradient(135deg, var(--cream) 0%, #e8e5df 100%);
-            padding-top: 80px;
+            padding-top: 100px;
         }
 
         .hero::before {
@@ -336,10 +314,71 @@
             margin-top: 0.5rem;
         }
 
+        /* Expertise Section */
+        .expertise {
+            padding: 8rem 3rem;
+            background: white;
+        }
+
+        .expertise-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .expertise-content h2 {
+            font-size: 3rem;
+            color: var(--dark-navy);
+            margin-bottom: 2rem;
+        }
+
+        .expertise-content p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .expertise-highlight {
+            background: linear-gradient(135deg, var(--sage-green), var(--light-green));
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(107,133,119,0.2);
+        }
+
+        .expertise-highlight h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .expertise-list {
+            list-style: none;
+        }
+
+        .expertise-list li {
+            padding: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        .expertise-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
         /* Services Section */
         .services {
             padding: 8rem 3rem;
-            background: white;
+            background: var(--cream);
             position: relative;
         }
 
@@ -379,7 +418,7 @@
         }
 
         .service-card {
-            background: var(--cream);
+            background: white;
             padding: 3rem;
             border-radius: 20px;
             transition: all 0.4s ease;
@@ -453,91 +492,16 @@
             font-size: 1.2rem;
         }
 
-        /* Benefits Section */
-        .benefits {
-            padding: 8rem 3rem;
-            background: linear-gradient(135deg, var(--dark-navy) 0%, #1f3244 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .benefits::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(200,165,116,0.1) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-
-        .benefits .section-label {
-            color: var(--gold);
-        }
-
-        .benefits .section-title {
-            color: white;
-        }
-
-        .benefits .section-description {
-            color: rgba(255,255,255,0.8);
-        }
-
-        .benefits-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .benefit-card {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 2.5rem;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .benefit-card:hover {
-            background: rgba(255,255,255,0.08);
-            transform: translateY(-5px);
-            border-color: rgba(200,165,116,0.3);
-        }
-
-        .benefit-number {
-            font-size: 3rem;
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--gold);
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
-        .benefit-title {
-            font-size: 1.5rem;
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .benefit-description {
-            color: rgba(255,255,255,0.8);
-            line-height: 1.8;
-        }
-
         /* Contact Section */
         .contact {
             padding: 8rem 3rem;
-            background: var(--cream);
+            background: white;
         }
 
         .contact-container {
             max-width: 1000px;
             margin: 0 auto;
-            background: white;
+            background: var(--cream);
             border-radius: 30px;
             padding: 4rem;
             box-shadow: 0 20px 60px rgba(0,0,0,0.1);
@@ -611,6 +575,7 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             transition: all 0.3s ease;
+            background: white;
         }
 
         .form-group input:focus,
@@ -646,10 +611,6 @@
             font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
             margin-bottom: 1rem;
-        }
-
-        .footer-logo .vita {
-            color: var(--sage-green);
         }
 
         .footer-description {
@@ -699,7 +660,8 @@
                 display: none;
             }
 
-            .hero-container {
+            .hero-container,
+            .expertise-container {
                 grid-template-columns: 1fr;
                 gap: 3rem;
                 padding: 2rem;
@@ -738,13 +700,12 @@
     <nav>
         <div class="nav-container">
             <div class="logo-nav">
-                <div class="logo-icon"></div>
-                <div class="logo-text">DocEt<span class="vita">Vita</span></div>
+                <img src="/mnt/user-data/uploads/logover.svg" alt="DocEtVita">
             </div>
             <ul class="nav-links">
                 <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#services">Nos Services</a></li>
-                <li><a href="#avantages">Avantages</a></li>
+                <li><a href="#expertise">Mon Expertise</a></li>
+                <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -758,12 +719,12 @@
                 <p class="hero-subtitle">Moins de papier, plus de liberté</p>
                 <p class="hero-description">
                     Libérez-vous de l'administratif et concentrez-vous sur l'essentiel : vos patients. 
-                    DocEtVita accompagne les professionnels de santé dans leur transformation numérique 
-                    avec une expertise dédiée et un service sur-mesure.
+                    Forte de mon expérience en tant que responsable administrative dans le secteur de l'optique, 
+                    je comprends les défis quotidiens des professionnels de santé.
                 </p>
                 <div class="cta-buttons">
-                    <a href="#contact" class="btn btn-primary">Découvrir nos services</a>
-                    <a href="#services" class="btn btn-secondary">En savoir plus</a>
+                    <a href="#contact" class="btn btn-primary">Prendre rendez-vous</a>
+                    <a href="#services" class="btn btn-secondary">Découvrir mes services</a>
                 </div>
             </div>
             <div class="hero-visual">
@@ -792,155 +753,127 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="section-header fade-in">
-            <div class="section-label">Nos Services</div>
-            <h2 class="section-title">Une solution complète pour votre cabinet</h2>
-            <p class="section-description">
-                Des services pensés pour les professionnels de santé qui souhaitent se concentrer 
-                sur leur cœur de métier.
-            </p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card fade-in">
-                <div class="service-icon">🗂️</div>
-                <h3 class="service-title">Gestion Documentaire</h3>
-                <p class="service-description">
-                    Dématérialisation et organisation de tous vos documents administratifs 
-                    en un seul endroit sécurisé et accessible.
+    <!-- Expertise Section -->
+    <section id="expertise" class="expertise">
+        <div class="expertise-container">
+            <div class="expertise-content fade-in">
+                <h2>Une expérience terrain au service de votre pratique</h2>
+                <p>
+                    Ancienne responsable administrative dans le domaine de l'optique, j'ai géré au quotidien 
+                    l'ensemble des aspects administratifs d'un établissement de santé : gestion des dossiers patients, 
+                    relations avec les mutuelles, planification, facturation et conformité réglementaire.
                 </p>
-                <ul class="service-features">
-                    <li>Numérisation et classement intelligent</li>
-                    <li>Archivage sécurisé conforme RGPD</li>
-                    <li>Recherche instantanée</li>
-                </ul>
+                <p>
+                    Cette expérience m'a permis de développer une compréhension approfondie des enjeux spécifiques 
+                    aux professionnels de santé : la nécessité d'une organisation rigoureuse, la gestion des relations 
+                    avec les organismes de santé, et surtout, l'importance de libérer du temps pour se consacrer aux patients.
+                </p>
+                <p>
+                    Aujourd'hui, je mets cette expertise à votre service pour vous accompagner dans la modernisation 
+                    et l'optimisation de votre gestion administrative.
+                </p>
             </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">⏰</div>
-                <h3 class="service-title">Gestion des Rendez-vous</h3>
-                <p class="service-description">
-                    Optimisez votre agenda et améliorez l'expérience de vos patients 
-                    avec une solution de prise de rendez-vous moderne.
-                </p>
-                <ul class="service-features">
-                    <li>Calendrier en ligne 24/7</li>
-                    <li>Rappels automatiques</li>
-                    <li>Synchronisation multi-plateformes</li>
-                </ul>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">💼</div>
-                <h3 class="service-title">Comptabilité & Facturation</h3>
-                <p class="service-description">
-                    Simplifiez votre gestion comptable avec des outils adaptés 
-                    aux spécificités des professions de santé.
-                </p>
-                <ul class="service-features">
-                    <li>Facturation automatisée</li>
-                    <li>Suivi des paiements</li>
-                    <li>Déclarations fiscales facilitées</li>
-                </ul>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">📊</div>
-                <h3 class="service-title">Reporting & Analyse</h3>
-                <p class="service-description">
-                    Pilotez votre activité avec des tableaux de bord clairs 
-                    et des indicateurs pertinents.
-                </p>
-                <ul class="service-features">
-                    <li>Statistiques d'activité</li>
-                    <li>Analyses financières</li>
-                    <li>Rapports personnalisables</li>
-                </ul>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">🔒</div>
-                <h3 class="service-title">Conformité & Sécurité</h3>
-                <p class="service-description">
-                    Garantissez la conformité de votre pratique avec les réglementations 
-                    en vigueur.
-                </p>
-                <ul class="service-features">
-                    <li>Conformité RGPD garantie</li>
-                    <li>Hébergement de données de santé (HDS)</li>
-                    <li>Audit et mise à jour continue</li>
-                </ul>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">🎯</div>
-                <h3 class="service-title">Accompagnement Personnalisé</h3>
-                <p class="service-description">
-                    Un support dédié pour vous accompagner dans votre transformation 
-                    digitale.
-                </p>
-                <ul class="service-features">
-                    <li>Formation à vos outils</li>
-                    <li>Support technique réactif</li>
-                    <li>Conseils personnalisés</li>
+            <div class="expertise-highlight fade-in">
+                <h3>Mon expertise en optique</h3>
+                <ul class="expertise-list">
+                    <li>Gestion complète des dossiers patients et tiers payant</li>
+                    <li>Relations avec les mutuelles et organismes de santé</li>
+                    <li>Organisation et optimisation des flux administratifs</li>
+                    <li>Maîtrise des logiciels métier du secteur santé</li>
+                    <li>Conformité RGPD et réglementations santé</li>
+                    <li>Formation continue aux évolutions du secteur</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- Benefits Section -->
-    <section id="avantages" class="benefits">
+    <!-- Services Section -->
+    <section id="services" class="services">
         <div class="section-header fade-in">
-            <div class="section-label">Pourquoi DocEtVita</div>
-            <h2 class="section-title">Les avantages de l'externalisation</h2>
+            <div class="section-label">Mes Services</div>
+            <h2 class="section-title">Des solutions adaptées à vos besoins</h2>
             <p class="section-description">
-                Concentrez-vous sur votre métier, nous nous occupons du reste.
+                Un accompagnement sur-mesure pour alléger votre charge administrative.
             </p>
         </div>
-        <div class="benefits-container">
-            <div class="benefit-card fade-in">
-                <div class="benefit-number">01</div>
-                <h3 class="benefit-title">Gain de Temps Considérable</h3>
-                <p class="benefit-description">
-                    Réduisez jusqu'à 50% le temps consacré aux tâches administratives 
-                    et redonnez du sens à votre pratique médicale.
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <div class="service-icon">🗂️</div>
+                <h3 class="service-title">Gestion Administrative</h3>
+                <p class="service-description">
+                    Prise en charge complète de votre administration quotidienne : courriers, 
+                    relances, classement et archivage numérique.
                 </p>
+                <ul class="service-features">
+                    <li>Traitement du courrier et emails</li>
+                    <li>Gestion des dossiers administratifs</li>
+                    <li>Archivage numérique sécurisé</li>
+                </ul>
             </div>
-            <div class="benefit-card fade-in">
-                <div class="benefit-number">02</div>
-                <h3 class="benefit-title">Réduction des Coûts</h3>
-                <p class="benefit-description">
-                    Éliminez les frais liés au personnel administratif, au stockage physique 
-                    et aux erreurs de gestion.
+            <div class="service-card fade-in">
+                <div class="service-icon">📅</div>
+                <h3 class="service-title">Gestion d'Agenda</h3>
+                <p class="service-description">
+                    Organisation optimale de vos rendez-vous et de votre planning professionnel 
+                    pour une meilleure gestion de votre temps.
                 </p>
+                <ul class="service-features">
+                    <li>Prise de rendez-vous et rappels</li>
+                    <li>Optimisation du planning</li>
+                    <li>Gestion des annulations et reports</li>
+                </ul>
             </div>
-            <div class="benefit-card fade-in">
-                <div class="benefit-number">03</div>
-                <h3 class="benefit-title">Expertise Métier</h3>
-                <p class="benefit-description">
-                    Bénéficiez de notre connaissance approfondie du secteur de la santé 
-                    et de ses spécificités réglementaires.
+            <div class="service-card fade-in">
+                <div class="service-icon">💰</div>
+                <h3 class="service-title">Facturation & Suivi</h3>
+                <p class="service-description">
+                    Gestion rigoureuse de vos factures, relances et relations avec les 
+                    mutuelles et organismes de santé.
                 </p>
+                <ul class="service-features">
+                    <li>Établissement des factures</li>
+                    <li>Suivi des paiements et relances</li>
+                    <li>Gestion tiers payant et mutuelles</li>
+                </ul>
             </div>
-            <div class="benefit-card fade-in">
-                <div class="benefit-number">04</div>
-                <h3 class="benefit-title">Sécurité Maximale</h3>
-                <p class="benefit-description">
-                    Vos données et celles de vos patients sont protégées par des systèmes 
-                    de sécurité de pointe conformes aux normes HDS.
+            <div class="service-card fade-in">
+                <div class="service-icon">📞</div>
+                <h3 class="service-title">Accueil Téléphonique</h3>
+                <p class="service-description">
+                    Permanence téléphonique professionnelle pour ne manquer aucun appel 
+                    et offrir un service optimal à vos patients.
                 </p>
+                <ul class="service-features">
+                    <li>Réception et filtrage des appels</li>
+                    <li>Prise de messages détaillés</li>
+                    <li>Renseignements aux patients</li>
+                </ul>
             </div>
-            <div class="benefit-card fade-in">
-                <div class="benefit-number">05</div>
-                <h3 class="benefit-title">Accessibilité 24/7</h3>
-                <p class="benefit-description">
-                    Accédez à vos documents et informations à tout moment, 
-                    où que vous soyez, depuis n'importe quel appareil.
+            <div class="service-card fade-in">
+                <div class="service-icon">🔄</div>
+                <h3 class="service-title">Digitalisation</h3>
+                <p class="service-description">
+                    Accompagnement dans votre transition numérique pour moderniser 
+                    vos processus et gagner en efficacité.
                 </p>
+                <ul class="service-features">
+                    <li>Numérisation de vos documents</li>
+                    <li>Mise en place d'outils digitaux</li>
+                    <li>Formation aux nouveaux outils</li>
+                </ul>
             </div>
-            <div class="benefit-card fade-in">
-                <div class="benefit-number">06</div>
-                <h3 class="benefit-title">Évolutivité</h3>
-                <p class="benefit-description">
-                    Nos solutions s'adaptent à la croissance de votre cabinet 
-                    sans investissement supplémentaire en infrastructure.
+            <div class="service-card fade-in">
+                <div class="service-icon">📊</div>
+                <h3 class="service-title">Reporting</h3>
+                <p class="service-description">
+                    Suivi de votre activité avec des tableaux de bord clairs 
+                    pour piloter votre cabinet en toute sérénité.
                 </p>
+                <ul class="service-features">
+                    <li>Tableaux de bord mensuels</li>
+                    <li>Statistiques d'activité</li>
+                    <li>Analyses et recommandations</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -950,15 +883,15 @@
         <div class="contact-container">
             <div class="section-header">
                 <div class="section-label">Contact</div>
-                <h2 class="section-title">Parlons de votre projet</h2>
+                <h2 class="section-title">Discutons de votre projet</h2>
                 <p class="section-description">
-                    Contactez-nous pour découvrir comment DocEtVita peut transformer 
-                    la gestion de votre cabinet médical.
+                    Contactez-moi pour échanger sur vos besoins et découvrir comment 
+                    je peux vous accompagner au quotidien.
                 </p>
             </div>
             <div class="contact-grid">
                 <div class="contact-info">
-                    <h3>Restons en contact</h3>
+                    <h3>Prenons contact</h3>
                     <div class="info-item">
                         <div class="info-icon">📧</div>
                         <div class="info-content">
@@ -970,20 +903,20 @@
                         <div class="info-icon">📱</div>
                         <div class="info-content">
                             <h4>Téléphone</h4>
-                            <p>01 23 45 67 89</p>
+                            <p>Sur rendez-vous</p>
                         </div>
                     </div>
                     <div class="info-item">
                         <div class="info-icon">🕒</div>
                         <div class="info-content">
-                            <h4>Horaires</h4>
+                            <h4>Disponibilité</h4>
                             <p>Lun - Ven : 9h00 - 18h00</p>
                         </div>
                     </div>
                 </div>
                 <form class="contact-form">
                     <div class="form-group">
-                        <label for="name">Nom complet</label>
+                        <label for="name">Nom et Prénom</label>
                         <input type="text" id="name" placeholder="Dr. Jean Dupont" required>
                     </div>
                     <div class="form-group">
@@ -992,7 +925,7 @@
                     </div>
                     <div class="form-group">
                         <label for="message">Votre message</label>
-                        <textarea id="message" placeholder="Parlez-nous de vos besoins..." required></textarea>
+                        <textarea id="message" placeholder="Parlez-moi de vos besoins..." required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Envoyer le message</button>
                 </form>
@@ -1004,7 +937,7 @@
     <footer>
         <div class="footer-container">
             <div>
-                <div class="footer-logo">DocEt<span class="vita">Vita</span></div>
+                <div class="footer-logo">DocEtVita</div>
                 <p class="footer-description">
                     Votre partenaire de confiance pour l'externalisation administrative 
                     des professionnels de santé. Simplifiez votre quotidien, 
@@ -1015,8 +948,8 @@
                 <h4>Navigation</h4>
                 <ul class="footer-links">
                     <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#services">Nos Services</a></li>
-                    <li><a href="#avantages">Avantages</a></li>
+                    <li><a href="#expertise">Mon Expertise</a></li>
+                    <li><a href="#services">Services</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -1026,7 +959,6 @@
                     <li><a href="#">Mentions Légales</a></li>
                     <li><a href="#">Politique de Confidentialité</a></li>
                     <li><a href="#">CGV</a></li>
-                    <li><a href="#">RGPD</a></li>
                 </ul>
             </div>
         </div>
@@ -1071,7 +1003,7 @@
         // Form submission
         document.querySelector('.contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Merci pour votre message ! Nous vous contacterons très prochainement.');
+            alert('Merci pour votre message ! Je vous contacterai très prochainement.');
             this.reset();
         });
 
