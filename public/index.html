@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocEtVita - Externalisation Administrative & Tiers Payant</title>
-
-    <!-- Google Fonts -->
+    <title>DocEtVita - Externalisation Administrative Santé</title>
+    <link rel="icon" type="image/png" href="/mnt/user-data/uploads/LOGO.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --sage-green: #6b8577;
@@ -21,57 +19,83 @@
             --light-green: #8fa397;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: var(--cream);
             color: var(--text-dark);
             line-height: 1.7;
+            overflow-x: hidden;
+            background: var(--cream);
         }
 
         h1, h2, h3, h4 {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
+            line-height: 1.2;
         }
 
-        /* NAV */
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .nav-container {
             max-width: 1400px;
-            margin: auto;
-            padding: 1.2rem 3rem;
+            margin: 0 auto;
+            padding: 0.8rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo-text {
-            font-size: 1.8rem;
-            color: var(--dark-navy);
+        .logo-nav {
+            height: 70px;
+            display: flex;
+            align-items: center;
         }
 
-        .logo-text .vita { color: var(--sage-green); }
+        .logo-nav img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
 
         .nav-links {
-            list-style: none;
             display: flex;
             gap: 2.5rem;
+            list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-dark);
+            font-weight: 400;
             font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
             position: relative;
         }
 
@@ -86,95 +110,397 @@
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-        /* HERO */
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding-top: 80px;
-            background: linear-gradient(135deg, var(--cream), #e8e5df);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--cream) 0%, #e8e5df 100%);
+            padding-top: 100px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(107,133,119,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
         }
 
         .hero-container {
             max-width: 1400px;
-            margin: auto;
+            margin: 0 auto;
             padding: 3rem;
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
             gap: 5rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .hero-title {
-            font-size: 4rem;
+            font-size: 4.5rem;
             color: var(--dark-navy);
             margin-bottom: 1.5rem;
+            line-height: 1.1;
         }
 
-        .hero-title span { color: var(--sage-green); font-style: italic; }
+        .hero-title .highlight {
+            color: var(--sage-green);
+            font-style: italic;
+        }
 
         .hero-subtitle {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: var(--gold);
-            margin-bottom: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 2rem;
         }
 
         .hero-description {
             font-size: 1.1rem;
             color: #555;
             margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .btn {
             padding: 1rem 2.5rem;
+            border: none;
             border-radius: 50px;
-            text-decoration: none;
+            font-size: 1rem;
             font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
             display: inline-block;
+            letter-spacing: 0.5px;
         }
 
         .btn-primary {
             background: var(--dark-navy);
             color: white;
+            box-shadow: 0 10px 30px rgba(44,66,84,0.2);
+        }
+
+        .btn-primary:hover {
+            background: #1e2f3d;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(44,66,84,0.3);
         }
 
         .btn-secondary {
-            border: 2px solid var(--sage-green);
-            color: var(--sage-green);
-            margin-left: 1rem;
+            background: transparent;
+            color: var(--dark-navy);
+            border: 2px solid var(--dark-navy);
         }
 
-        /* SECTIONS */
-        section { padding: 8rem 3rem; }
+        .btn-secondary:hover {
+            background: var(--dark-navy);
+            color: white;
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: fadeInRight 1s ease-out;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-image-container {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .hero-image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(107,133,119,0.1) 0%, rgba(44,66,84,0.1) 100%);
+            z-index: 1;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 7rem 3rem;
+            position: relative;
+        }
 
         .section-header {
             text-align: center;
             max-width: 800px;
-            margin: auto auto 5rem;
+            margin: 0 auto 5rem;
         }
 
         .section-label {
-            text-transform: uppercase;
-            letter-spacing: 2px;
             color: var(--gold);
             font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             margin-bottom: 1rem;
         }
 
         .section-title {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--dark-navy);
             margin-bottom: 1.5rem;
         }
 
-        .section-description { color: #666; }
+        .section-description {
+            font-size: 1.15rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Expertise Section */
+        .expertise {
+            background: var(--white);
+        }
+
+        .expertise-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .expertise-text h3 {
+            font-size: 2rem;
+            color: var(--dark-navy);
+            margin-bottom: 2rem;
+        }
+
+        .expertise-text p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .expertise-features {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            padding: 2rem;
+            background: var(--cream);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .feature-content h4 {
+            font-size: 1.3rem;
+            color: var(--dark-navy);
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-content p {
+            font-size: 1rem;
+            color: #666;
+            margin: 0;
+        }
+
+        .expertise-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, var(--sage-green) 0%, var(--dark-navy) 100%);
+            border-radius: 20px;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Mode de travail section */
+        .work-mode {
+            background: linear-gradient(135deg, #f8f7f4 0%, var(--cream) 100%);
+        }
+
+        .work-mode-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .work-mode-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+
+        .work-mode-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            border-color: var(--gold);
+        }
+
+        .work-mode-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .work-mode-card h3 {
+            font-size: 1.8rem;
+            color: var(--dark-navy);
+            margin-bottom: 1.5rem;
+        }
+
+        .work-mode-card p {
+            font-size: 1.05rem;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .work-mode-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .work-mode-features li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .work-mode-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--sage-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .highlight-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold) 0%, #d4b889 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-top: 1rem;
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--cream);
+        }
 
         .services-grid {
             max-width: 1400px;
-            margin: auto;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 3rem;
         }
 
@@ -182,77 +508,160 @@
             background: white;
             padding: 3rem;
             border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.06);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
         }
 
         .service-title {
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
+            font-size: 1.8rem;
             color: var(--dark-navy);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-description {
+            font-size: 1.05rem;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 2rem;
         }
 
         .service-features {
             list-style: none;
-            margin-top: 1.5rem;
+            padding: 0;
         }
 
         .service-features li {
-            padding-left: 1.5rem;
-            margin-bottom: 0.7rem;
+            padding: 0.8rem 0;
+            padding-left: 2rem;
             position: relative;
+            color: #555;
+            font-size: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
         }
 
         .service-features li::before {
-            content: "✓";
+            content: '→';
             position: absolute;
             left: 0;
-            color: var(--sage-green);
+            color: var(--gold);
+            font-weight: bold;
         }
 
-        /* BENEFITS */
-        .benefits {
-            background: linear-gradient(135deg, var(--dark-navy), #1f3244);
-            color: white;
+        /* Contact Section */
+        .contact {
+            background: var(--white);
         }
 
-        .benefits .section-title { color: white; }
-
-        .benefits-container {
-            max-width: 1400px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-            gap: 2.5rem;
-        }
-
-        .benefit-card {
-            background: rgba(255,255,255,0.05);
-            padding: 2.5rem;
-            border-radius: 20px;
-        }
-
-        /* CONTACT */
         .contact-container {
-            max-width: 1000px;
-            margin: auto;
-            background: white;
-            padding: 4rem;
-            border-radius: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .contact-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 5rem;
+            margin-top: 4rem;
         }
 
-        .contact-form input,
-        .contact-form textarea {
-            padding: 1rem;
-            border-radius: 10px;
-            border: 2px solid #ddd;
+        .contact-info h3 {
+            font-size: 2rem;
+            color: var(--dark-navy);
+            margin-bottom: 2rem;
         }
 
+        .info-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            align-items: flex-start;
+        }
+
+        .info-icon {
+            font-size: 2rem;
+            color: var(--sage-green);
+            flex-shrink: 0;
+        }
+
+        .info-content h4 {
+            font-size: 1.2rem;
+            color: var(--dark-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-content p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .info-content a {
+            color: var(--sage-green);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .info-content a:hover {
+            color: var(--dark-navy);
+        }
+
+        .contact-form {
+            background: var(--cream);
+            padding: 3rem;
+            border-radius: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: var(--dark-navy);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--sage-green);
+            box-shadow: 0 0 0 4px rgba(107,133,119,0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
         footer {
             background: var(--dark-navy);
             color: white;
@@ -261,158 +670,614 @@
 
         .footer-container {
             max-width: 1400px;
-            margin: auto;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
             gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+
+        .footer-description {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-section h4 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
         }
 
         .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
             text-align: center;
-            margin-top: 3rem;
-            opacity: 0.5;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
         }
 
-        @media (max-width: 900px) {
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
             .hero-container,
-            .contact-grid,
+            .expertise-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-title {
+                font-size: 3.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
             .footer-container {
                 grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .services-grid,
+            .work-mode-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .expertise-stats {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
         }
     </style>
 </head>
-
 <body>
-
-<nav>
-    <div class="nav-container">
-        <div class="logo-text">DocEt<span class="vita">Vita</span></div>
-        <ul class="nav-links">
-            <li><a href="#accueil">Accueil</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#tiers">Tiers Payant</a></li>
-            <li><a href="#avantages">Avantages</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
-</nav>
-
-<section id="accueil" class="hero">
-    <div class="hero-container">
-        <div>
-            <h1 class="hero-title">La vie sans <span>paperasse</span></h1>
-            <p class="hero-subtitle">Externalisation administrative & tiers payant</p>
-            <p class="hero-description">
-                DocEtVita accompagne les professionnels de santé dans la gestion administrative externalisée :
-                facturation, tiers payant, assistance à distance sécurisée via RustDesk et suivi quotidien.
-            </p>
-            <a href="#contact" class="btn btn-primary">Découvrir nos services</a>
-            <a href="#services" class="btn btn-secondary">En savoir plus</a>
-        </div>
-    </div>
-</section>
-
-<section id="services">
-    <div class="section-header">
-        <div class="section-label">Nos services</div>
-        <h2 class="section-title">Une gestion administrative déléguée</h2>
-        <p class="section-description">Nous intervenons comme votre service administratif externalisé.</p>
-    </div>
-
-    <div class="services-grid">
-        <div class="service-card">
-            <h3 class="service-title">Gestion administrative complète</h3>
-            <p>Traitement des documents, courriers, dossiers patients et obligations administratives.</p>
-            <ul class="service-features">
-                <li>Dématérialisation</li>
-                <li>Classement sécurisé</li>
-                <li>Archivage conforme RGPD</li>
-            </ul>
-        </div>
-
-        <div class="service-card">
-            <h3 class="service-title">Gestion du tiers payant</h3>
-            <p>Externalisation complète du suivi AMO / AMC.</p>
-            <ul class="service-features">
-                <li>Traitement des rejets</li>
-                <li>Relances organismes</li>
-                <li>Réduction des impayés</li>
-            </ul>
-        </div>
-
-        <div class="service-card">
-            <h3 class="service-title">Assistance à distance sécurisée</h3>
-            <p>Intervention directe sur vos outils métiers via RustDesk.</p>
-            <ul class="service-features">
-                <li>Connexion chiffrée</li>
-                <li>Accès contrôlé</li>
-                <li>Traçabilité complète</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<section id="avantages" class="benefits">
-    <div class="section-header">
-        <div class="section-label">Pourquoi DocEtVita</div>
-        <h2 class="section-title">Les bénéfices pour votre cabinet</h2>
-    </div>
-
-    <div class="benefits-container">
-        <div class="benefit-card">Gain de temps médical</div>
-        <div class="benefit-card">Sécurité & conformité</div>
-        <div class="benefit-card">Aucun recrutement</div>
-        <div class="benefit-card">Service humain dédié</div>
-    </div>
-</section>
-
-<section id="contact">
-    <div class="contact-container">
-        <div class="section-header">
-            <div class="section-label">Contact</div>
-            <h2 class="section-title">Parlons de votre projet</h2>
-        </div>
-
-        <div class="contact-grid">
-            <div>
-                <p><strong>Email :</strong> contact@docetvita.fr</p>
-                <p><strong>Téléphone :</strong> 01 23 45 67 89</p>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo-nav">
+                <img src="/mnt/user-data/uploads/LOGO.png" alt="DocEtVita Logo">
             </div>
-            <form class="contact-form">
-                <input type="text" placeholder="Nom complet">
-                <input type="email" placeholder="Email professionnel">
-                <textarea placeholder="Votre message"></textarea>
-                <button class="btn btn-primary" type="submit">Envoyer</button>
-            </form>
-        </div>
-    </div>
-</section>
-
-<footer>
-    <div class="footer-container">
-        <div>
-            <h3>DocEt<span class="vita">Vita</span></h3>
-            <p>Externalisation administrative des professionnels de santé.</p>
-        </div>
-        <div>
-            <h4>Navigation</h4>
-            <ul>
-                <li>Accueil</li>
-                <li>Services</li>
-                <li>Contact</li>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#expertise">Mon Expertise</a></li>
+                <li><a href="#mode-travail">Mode de Travail</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
-        <div>
-            <h4>Légal</h4>
-            <ul>
-                <li>Mentions légales</li>
-                <li>RGPD</li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">© 2026 DocEtVita</div>
-</footer>
+    </nav>
 
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Libérez votre temps pour <span class="highlight">ce qui compte vraiment</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Votre assistant administratif dédié aux professionnels de santé
+                </p>
+                <p class="hero-description">
+                    Vous êtes médecin, infirmier·e, kinésithérapeute ou professionnel de santé ? 
+                    Votre temps est précieux et doit être consacré à vos patients. Je prends en charge 
+                    l'intégralité de votre administration pour vous permettre de vous concentrer sur 
+                    votre cœur de métier : soigner et accompagner.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Prenons rendez-vous</a>
+                    <a href="#services" class="btn btn-secondary">Découvrir les services</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image-container">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop" 
+                         alt="Professionnel de santé" 
+                         class="hero-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise" class="expertise">
+        <div class="section-header fade-in">
+            <div class="section-label">Mon Expertise</div>
+            <h2 class="section-title">Une professionnelle au service de votre cabinet</h2>
+            <p class="section-description">
+                Forte d'une expérience significative dans le secteur administratif et spécialisée 
+                dans l'accompagnement des professionnels de santé, je connais parfaitement vos enjeux 
+                et vos contraintes quotidiennes.
+            </p>
+        </div>
+        <div class="expertise-content">
+            <div class="expertise-text fade-in">
+                <h3>Une expertise complète et personnalisée</h3>
+                <p>
+                    Chaque cabinet médical est unique, avec ses propres besoins et son organisation spécifique. 
+                    C'est pourquoi j'adopte une approche sur-mesure pour chacun de mes clients. Mon objectif ? 
+                    Comprendre votre fonctionnement et m'adapter parfaitement à vos habitudes de travail.
+                </p>
+                <p>
+                    Que vous soyez en cabinet individuel, en cabinet de groupe, ou en maison de santé, 
+                    je m'intègre naturellement dans votre écosystème professionnel pour vous apporter 
+                    une solution administrative complète et efficace.
+                </p>
+                <div class="expertise-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">🎯</div>
+                        <div class="feature-content">
+                            <h4>Approche personnalisée</h4>
+                            <p>Analyse de vos besoins spécifiques et mise en place d'une organisation adaptée à votre pratique.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <div class="feature-content">
+                            <h4>Confidentialité garantie</h4>
+                            <p>Respect strict du secret professionnel et sécurisation de toutes vos données sensibles.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-content">
+                            <h4>Réactivité maximale</h4>
+                            <p>Disponibilité et réponse rapide pour gérer efficacement les urgences administratives.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="expertise-stats fade-in">
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Satisfaction client</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Années d'expérience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24h</div>
+                    <div class="stat-label">Délai de réponse moyen</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50%</div>
+                    <div class="stat-label">Gain de temps estimé</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mode de travail Section -->
+    <section id="mode-travail" class="work-mode">
+        <div class="section-header fade-in">
+            <div class="section-label">Mode de Travail</div>
+            <h2 class="section-title">Une flexibilité totale adaptée à vos besoins</h2>
+            <p class="section-description">
+                Je propose différentes formules d'intervention pour m'adapter parfaitement à votre organisation 
+                et à vos préférences. Que ce soit à distance ou en présentiel, vous bénéficiez du même niveau 
+                de qualité et de professionnalisme.
+            </p>
+        </div>
+        <div class="work-mode-grid">
+            <div class="work-mode-card fade-in">
+                <span class="work-mode-icon">💻</span>
+                <h3>Travail à distance</h3>
+                <p>
+                    Grâce à l'utilisation de <strong>RustDesk</strong>, un outil professionnel de prise en main 
+                    à distance ultra-sécurisé, je peux accéder à votre système comme si j'étais physiquement 
+                    présente dans votre cabinet. Cette technologie me permet d'intervenir en temps réel sur vos 
+                    logiciels métiers, de traiter vos documents, et de gérer l'ensemble de vos tâches administratives 
+                    exactement comme si j'étais à vos côtés.
+                </p>
+                <ul class="work-mode-features">
+                    <li>Connexion sécurisée et cryptée à votre poste de travail</li>
+                    <li>Intervention en temps réel sur vos logiciels professionnels</li>
+                    <li>Accès aux mêmes outils que sur place</li>
+                    <li>Pas de déplacement nécessaire = économies de temps et d'argent</li>
+                    <li>Disponibilité étendue selon vos besoins</li>
+                    <li>Réactivité immédiate en cas d'urgence</li>
+                </ul>
+                <span class="highlight-badge">Solution privilégiée pour un suivi continu</span>
+            </div>
+            
+            <div class="work-mode-card fade-in">
+                <span class="work-mode-icon">🏢</span>
+                <h3>Journées en entreprise</h3>
+                <p>
+                    Pour bien démarrer notre collaboration ou pour des besoins spécifiques, je me déplace 
+                    directement dans votre cabinet. Ces journées sur site me permettent d'évaluer précisément 
+                    vos besoins, de comprendre votre organisation, de configurer les outils, et de former 
+                    votre équipe si nécessaire.
+                </p>
+                <ul class="work-mode-features">
+                    <li>Audit complet de votre organisation administrative</li>
+                    <li>Évaluation personnalisée de vos besoins réels</li>
+                    <li>Installation et configuration des outils de travail</li>
+                    <li>Formation de votre équipe aux nouveaux processus</li>
+                    <li>Mise en place des procédures et protocoles</li>
+                    <li>Diagnostic de votre système actuel</li>
+                    <li>Réorganisation et optimisation des flux de travail</li>
+                </ul>
+                <span class="highlight-badge">Idéal pour le démarrage et les formations</span>
+            </div>
+            
+            <div class="work-mode-card fade-in">
+                <span class="work-mode-icon">🔄</span>
+                <h3>Formule hybride</h3>
+                <p>
+                    La meilleure des deux approches : nous commençons par une ou plusieurs journées en présentiel 
+                    pour poser les bases, puis je continue à vous accompagner à distance au quotidien. Cette formule 
+                    combine l'efficacité de la présence physique initiale avec la flexibilité et la réactivité 
+                    du travail à distance.
+                </p>
+                <ul class="work-mode-features">
+                    <li>Phase de démarrage sur site pour un accompagnement optimal</li>
+                    <li>Transition progressive vers le travail à distance</li>
+                    <li>Suivi régulier via RustDesk pour les tâches quotidiennes</li>
+                    <li>Possibilité de journées ponctuelles sur site selon les besoins</li>
+                    <li>Flexibilité maximale dans l'organisation</li>
+                    <li>Optimisation des coûts tout en gardant un service premium</li>
+                </ul>
+                <span class="highlight-badge">La solution la plus complète et flexible</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="section-header fade-in">
+            <div class="section-label">Mes Services</div>
+            <h2 class="section-title">Des solutions complètes pour toute votre administration</h2>
+            <p class="section-description">
+                De la gestion quotidienne aux tâches les plus complexes, je prends en charge l'ensemble 
+                de vos besoins administratifs pour vous permettre de vous concentrer sur l'essentiel : vos patients.
+            </p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <div class="service-icon">🗂️</div>
+                <h3 class="service-title">Gestion Administrative Complète</h3>
+                <p class="service-description">
+                    Je prends en charge l'intégralité de votre gestion administrative quotidienne : traitement 
+                    du courrier physique et électronique, gestion et mise à jour de vos dossiers patients, 
+                    archivage numérique sécurisé conforme aux normes RGPD, et classement méthodique de tous 
+                    vos documents professionnels.
+                </p>
+                <ul class="service-features">
+                    <li>Tri, traitement et réponse au courrier et aux emails professionnels</li>
+                    <li>Création et mise à jour des dossiers patients dans votre logiciel métier</li>
+                    <li>Numérisation et archivage sécurisé de vos documents</li>
+                    <li>Organisation et classement de votre documentation professionnelle</li>
+                    <li>Gestion des demandes d'informations et de documents</li>
+                    <li>Suivi des échéances administratives importantes</li>
+                </ul>
+            </div>
+            
+            <div class="service-card fade-in">
+                <div class="service-icon">📅</div>
+                <h3 class="service-title">Gestion d'Agenda & Planning</h3>
+                <p class="service-description">
+                    Optimisation complète de votre emploi du temps avec gestion intelligente de vos rendez-vous, 
+                    coordination des différents agendas pour les cabinets de groupe, rappels automatiques aux patients, 
+                    et gestion proactive des annulations et reports pour limiter les créneaux vides.
+                </p>
+                <ul class="service-features">
+                    <li>Prise de rendez-vous téléphonique et par email</li>
+                    <li>Envoi de rappels automatiques aux patients (SMS/Email)</li>
+                    <li>Gestion optimisée des annulations et reprogrammations</li>
+                    <li>Coordination des plannings en cabinet de groupe</li>
+                    <li>Blocage de créneaux pour formations ou absences</li>
+                    <li>Statistiques de fréquentation et taux de remplissage</li>
+                </ul>
+            </div>
+            
+            <div class="service-card fade-in">
+                <div class="service-icon">💰</div>
+                <h3 class="service-title">Facturation & Suivi Financier</h3>
+                <p class="service-description">
+                    Gestion rigoureuse et complète de votre facturation : établissement des factures conformes, 
+                    transmission sécurisée aux organismes de santé, suivi précis des paiements, relances 
+                    professionnelles des impayés, et gestion experte du tiers payant et des relations avec 
+                    les mutuelles.
+                </p>
+                <ul class="service-features">
+                    <li>Création et envoi des factures aux patients et organismes</li>
+                    <li>Gestion complète du tiers payant (CPAM, mutuelles)</li>
+                    <li>Suivi détaillé des encaissements et des impayés</li>
+                    <li>Relances amiables et professionnelles des retards de paiement</li>
+                    <li>Rapprochements bancaires et suivi de trésorerie</li>
+                    <li>Préparation des documents comptables pour votre expert-comptable</li>
+                </ul>
+            </div>
+            
+            <div class="service-card fade-in">
+                <div class="service-icon">📞</div>
+                <h3 class="service-title">Accueil Téléphonique Professionnel</h3>
+                <p class="service-description">
+                    Service de permanence téléphonique dédié pour ne manquer aucun appel important. 
+                    Réception professionnelle des appels, filtrage intelligent, prise de messages détaillés, 
+                    et renseignements aux patients dans le respect de votre protocole de communication.
+                </p>
+                <ul class="service-features">
+                    <li>Réception et filtrage des appels entrants</li>
+                    <li>Prise de rendez-vous par téléphone</li>
+                    <li>Prise de messages détaillés et transmission immédiate</li>
+                    <li>Renseignements aux patients (horaires, tarifs, modalités)</li>
+                    <li>Gestion des urgences selon votre protocole</li>
+                    <li>Service disponible selon vos plages horaires définies</li>
+                </ul>
+            </div>
+            
+            <div class="service-card fade-in">
+                <div class="service-icon">🔄</div>
+                <h3 class="service-title">Digitalisation & Modernisation</h3>
+                <p class="service-description">
+                    Accompagnement complet dans votre transition numérique : numérisation de vos archives 
+                    papier, mise en place et paramétrage d'outils digitaux adaptés à votre pratique, 
+                    formation personnalisée aux nouveaux outils, et optimisation continue de vos processus 
+                    pour gagner en efficacité.
+                </p>
+                <ul class="service-features">
+                    <li>Numérisation complète de vos archives et documents</li>
+                    <li>Sélection et déploiement d'outils adaptés à vos besoins</li>
+                    <li>Paramétrage de votre logiciel métier et optimisation</li>
+                    <li>Formation pratique à l'utilisation des nouveaux outils</li>
+                    <li>Mise en place de processus digitaux efficients</li>
+                    <li>Support technique et accompagnement au changement</li>
+                </ul>
+            </div>
+            
+            <div class="service-card fade-in">
+                <div class="service-icon">📊</div>
+                <h3 class="service-title">Reporting & Tableaux de Bord</h3>
+                <p class="service-description">
+                    Pilotage de votre activité grâce à des tableaux de bord clairs et personnalisés. 
+                    Statistiques détaillées de votre activité, analyse des performances, suivi des indicateurs 
+                    clés, et recommandations concrètes pour optimiser la gestion de votre cabinet.
+                </p>
+                <ul class="service-features">
+                    <li>Tableaux de bord mensuels personnalisés</li>
+                    <li>Statistiques détaillées d'activité et de fréquentation</li>
+                    <li>Analyse du chiffre d'affaires et de la rentabilité</li>
+                    <li>Suivi des taux de remplissage et d'occupation</li>
+                    <li>Identification des tendances et opportunités</li>
+                    <li>Recommandations stratégiques basées sur les données</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <div class="section-header">
+                <div class="section-label">Contact</div>
+                <h2 class="section-title">Discutons de votre projet</h2>
+                <p class="section-description">
+                    Vous souhaitez alléger votre charge administrative et vous recentrer sur votre cœur de métier ? 
+                    Contactez-moi pour un premier échange sans engagement. Ensemble, nous analyserons vos besoins 
+                    et définirons la solution la plus adaptée à votre cabinet.
+                </p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Prenons contact</h3>
+                    <div class="info-item">
+                        <div class="info-icon">📧</div>
+                        <div class="info-content">
+                            <h4>Email</h4>
+                            <p><a href="mailto:contact@docetvita.fr">contact@docetvita.fr</a></p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📱</div>
+                        <div class="info-content">
+                            <h4>Téléphone</h4>
+                            <p>Sur rendez-vous uniquement</p>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #888;">
+                                Pour garantir ma disponibilité et vous offrir toute mon attention
+                            </p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">🕒</div>
+                        <div class="info-content">
+                            <h4>Disponibilité</h4>
+                            <p>Lundi - Vendredi : 9h00 - 18h00</p>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #888;">
+                                Flexibilité possible selon vos contraintes
+                            </p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">🎯</div>
+                        <div class="info-content">
+                            <h4>Premier contact</h4>
+                            <p>Audit gratuit de vos besoins</p>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #888;">
+                                Échange de 30 minutes pour comprendre votre situation
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nom et Prénom *</label>
+                        <input type="text" id="name" placeholder="Dr. Marie Dupont" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email professionnel *</label>
+                        <input type="email" id="email" placeholder="marie.dupont@cabinet.fr" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Téléphone</label>
+                        <input type="tel" id="phone" placeholder="06 12 34 56 78">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre message *</label>
+                        <textarea id="message" placeholder="Parlez-moi de vos besoins, de votre cabinet, et de ce qui vous prendrait le plus de temps au quotidien..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Envoyer le message</button>
+                    <p style="font-size: 0.85rem; color: #888; margin-top: 1rem; text-align: center;">
+                        Réponse garantie sous 24h ouvrées
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">DocEtVita</div>
+                <p class="footer-description">
+                    Votre partenaire de confiance pour l'externalisation administrative 
+                    des professionnels de santé. Je vous accompagne au quotidien pour simplifier 
+                    votre gestion administrative et vous permettre de vous concentrer sur l'essentiel : 
+                    vos patients et votre pratique médicale.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#expertise">Mon Expertise</a></li>
+                    <li><a href="#mode-travail">Mode de Travail</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Informations</h4>
+                <ul class="footer-links">
+                    <li><a href="#mentions">Mentions Légales</a></li>
+                    <li><a href="#confidentialite">Politique de Confidentialité</a></li>
+                    <li><a href="#cgv">Conditions Générales</a></li>
+                    <li><a href="#rgpd">Protection des Données</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 DocEtVita - Tous droits réservés | Externalisation administrative pour professionnels de santé</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Merci pour votre message ! Je vous contacterai dans les 24h ouvrées.');
+            this.reset();
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 2px 30px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
+            }
+        });
+    </script>
 </body>
 </html>
