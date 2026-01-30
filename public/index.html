@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="/mnt/user-data/uploads/LOGO.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --sage-green: #6b8577;
@@ -26,7 +26,7 @@
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             color: var(--text-dark);
             line-height: 1.7;
             overflow-x: hidden;
@@ -34,9 +34,9 @@
         }
 
         h1, h2, h3, h4 {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-            line-height: 1.2;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.15;
         }
 
         /* Navigation */
@@ -44,11 +44,12 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
-            animation: slideDown 0.6s ease-out;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+            animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes slideDown {
@@ -65,16 +66,21 @@
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0.8rem 3rem;
+            padding: 1.2rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo-nav {
-            height: 70px;
+            height: 60px;
             display: flex;
             align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-nav:hover {
+            transform: scale(1.05);
         }
 
         .logo-nav img {
@@ -85,29 +91,35 @@
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 3rem;
             list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-dark);
-            font-weight: 400;
-            font-size: 0.95rem;
-            letter-spacing: 0.3px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
             transition: all 0.3s ease;
             position: relative;
+            padding: 0.5rem 0;
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 0;
             height: 2px;
             background: var(--gold);
-            transition: width 0.3s ease;
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-links a:hover {
+            color: var(--sage-green);
         }
 
         .nav-links a:hover::after {
@@ -121,112 +133,208 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--cream) 0%, #e8e5df 100%);
-            padding-top: 100px;
+            background: linear-gradient(135deg, rgba(245,243,239,0.95) 0%, rgba(232,229,223,0.95) 100%);
+            padding-top: 120px;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(107,133,119,0.08) 0%, transparent 70%);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&h=1200&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.08;
+            z-index: 0;
+        }
+
+        .hero-grain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="3" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+            opacity: 0.03;
+            z-index: 1;
+        }
+
+        .floating-shape {
+            position: absolute;
             border-radius: 50%;
-            animation: float 20s infinite ease-in-out;
+            background: radial-gradient(circle, rgba(107,133,119,0.15) 0%, transparent 70%);
+            animation: float 25s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        .floating-shape-1 {
+            width: 600px;
+            height: 600px;
+            top: -15%;
+            right: -10%;
+            animation-delay: 0s;
+        }
+
+        .floating-shape-2 {
+            width: 400px;
+            height: 400px;
+            bottom: -10%;
+            left: -5%;
+            animation-delay: -8s;
+            background: radial-gradient(circle, rgba(200,165,116,0.12) 0%, transparent 70%);
         }
 
         @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, -30px) rotate(120deg); }
-            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            0%, 100% { 
+                transform: translate(0, 0) scale(1) rotate(0deg); 
+            }
+            33% { 
+                transform: translate(40px, -60px) scale(1.1) rotate(120deg); 
+            }
+            66% { 
+                transform: translate(-30px, 40px) scale(0.95) rotate(240deg); 
+            }
         }
 
         .hero-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 3rem;
+            padding: 4rem 3rem;
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 5rem;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 6rem;
             align-items: center;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .hero-content {
-            animation: fadeInLeft 1s ease-out;
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes fadeInLeft {
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateX(-50px);
+                transform: translateY(60px);
             }
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateY(0);
             }
         }
 
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--sage-green);
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            animation: fadeIn 1.4s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero-badge::before {
+            content: '✨';
+            font-size: 1rem;
+        }
+
         .hero-title {
-            font-size: 4.5rem;
+            font-size: 5rem;
             color: var(--dark-navy);
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
+            margin-bottom: 1.8rem;
+            line-height: 1.08;
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
         }
 
         .hero-title .highlight {
             color: var(--sage-green);
+            display: block;
             font-style: italic;
+            font-weight: 800;
         }
 
         .hero-subtitle {
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             color: var(--gold);
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 400;
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
             font-style: italic;
             margin-bottom: 2rem;
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
         }
 
         .hero-description {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: #555;
             margin-bottom: 3rem;
-            line-height: 1.8;
+            line-height: 1.9;
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards;
         }
 
         .cta-buttons {
             display: flex;
             gap: 1.5rem;
             flex-wrap: wrap;
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards;
         }
 
         .btn {
-            padding: 1rem 2.5rem;
+            padding: 1.1rem 2.8rem;
             border: none;
             border-radius: 50px;
             font-size: 1rem;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             text-decoration: none;
-            display: inline-block;
-            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            letter-spacing: 0.3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .btn:hover::before {
+            width: 400px;
+            height: 400px;
         }
 
         .btn-primary {
-            background: var(--dark-navy);
+            background: linear-gradient(135deg, var(--dark-navy) 0%, #1e2f3d 100%);
             color: white;
-            box-shadow: 0 10px 30px rgba(44,66,84,0.2);
+            box-shadow: 0 10px 40px rgba(44,66,84,0.25);
         }
 
         .btn-primary:hover {
-            background: #1e2f3d;
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(44,66,84,0.3);
+            box-shadow: 0 20px 50px rgba(44,66,84,0.35);
         }
 
         .btn-secondary {
@@ -238,17 +346,19 @@
         .btn-secondary:hover {
             background: var(--dark-navy);
             color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(44,66,84,0.2);
         }
 
         .hero-visual {
             position: relative;
-            animation: fadeInRight 1s ease-out;
+            animation: fadeInRight 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
         }
 
         @keyframes fadeInRight {
             from {
                 opacity: 0;
-                transform: translateX(50px);
+                transform: translateX(80px);
             }
             to {
                 opacity: 1;
@@ -256,67 +366,151 @@
             }
         }
 
-        .hero-image-container {
+        .hero-image-wrapper {
             position: relative;
-            border-radius: 20px;
+            border-radius: 30px;
             overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .hero-image-container::before {
+        .hero-image-wrapper:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .hero-image-wrapper::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(107,133,119,0.1) 0%, rgba(44,66,84,0.1) 100%);
+            background: linear-gradient(135deg, rgba(107,133,119,0.25) 0%, rgba(44,66,84,0.25) 100%);
             z-index: 1;
+            mix-blend-mode: multiply;
         }
 
         .hero-image {
             width: 100%;
-            height: 600px;
+            height: 650px;
             object-fit: cover;
             display: block;
         }
 
+        .hero-float-card {
+            position: absolute;
+            background: white;
+            padding: 1.8rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            z-index: 2;
+            animation: floatCard 6s infinite ease-in-out;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .hero-float-card-1 {
+            bottom: 10%;
+            left: -8%;
+            animation-delay: 0s;
+        }
+
+        .hero-float-card-2 {
+            top: 15%;
+            right: -5%;
+            animation-delay: -3s;
+        }
+
+        .float-card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .float-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark-navy);
+            margin-bottom: 0.4rem;
+        }
+
+        .float-card-text {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
         /* Section Styles */
         section {
-            padding: 7rem 3rem;
+            padding: 8rem 3rem;
             position: relative;
         }
 
         .section-header {
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto 5rem;
+            max-width: 900px;
+            margin: 0 auto 6rem;
         }
 
         .section-label {
             color: var(--gold);
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 2px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .section-label::before {
+            right: calc(100% + 15px);
+        }
+
+        .section-label::after {
+            left: calc(100% + 15px);
         }
 
         .section-title {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             color: var(--dark-navy);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
         }
 
         .section-description {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             color: #666;
-            line-height: 1.8;
+            line-height: 1.9;
         }
 
         /* Expertise Section */
         .expertise {
             background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .expertise::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
         }
 
         .expertise-content {
@@ -324,26 +518,75 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 5rem;
+            gap: 6rem;
             align-items: center;
         }
 
+        .expertise-image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .expertise-img {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .expertise-img:hover {
+            transform: scale(1.05) rotate(2deg);
+            z-index: 10;
+        }
+
+        .expertise-img img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .expertise-img:nth-child(1) {
+            grid-column: span 2;
+        }
+
+        .expertise-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.3) 100%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .expertise-img:hover::before {
+            opacity: 1;
+        }
+
         .expertise-text h3 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--dark-navy);
             margin-bottom: 2rem;
+            line-height: 1.2;
         }
 
         .expertise-text p {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: #555;
             margin-bottom: 2rem;
-            line-height: 1.8;
+            line-height: 1.9;
         }
 
         .expertise-features {
             display: grid;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-top: 3rem;
         }
 
@@ -353,22 +596,29 @@
             align-items: flex-start;
             padding: 2rem;
             background: var(--cream);
-            border-radius: 15px;
-            transition: all 0.3s ease;
+            border-radius: 18px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 2px solid transparent;
         }
 
         .feature-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateX(10px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
         }
 
         .feature-icon {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             flex-shrink: 0;
+            transition: transform 0.4s ease;
+        }
+
+        .feature-item:hover .feature-icon {
+            transform: scale(1.2) rotate(10deg);
         }
 
         .feature-content h4 {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: var(--dark-navy);
             margin-bottom: 0.8rem;
         }
@@ -379,73 +629,141 @@
             margin: 0;
         }
 
-        .expertise-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, var(--dark-navy) 0%, #1e2f3d 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
         }
 
-        .stat-card {
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1600&h=900&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.08;
+        }
+
+        .stats-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
             text-align: center;
             padding: 3rem 2rem;
-            background: linear-gradient(135deg, var(--sage-green) 0%, var(--dark-navy) 100%);
-            border-radius: 20px;
-            color: white;
-            transition: transform 0.3s ease;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .stat-card:hover {
-            transform: translateY(-10px);
+        .stat-item:hover {
+            transform: translateY(-15px);
+            background: rgba(255,255,255,0.12);
+            border-color: var(--gold);
         }
 
         .stat-number {
-            font-size: 3.5rem;
-            font-weight: 700;
-            font-family: 'Cormorant Garamond', serif;
-            margin-bottom: 0.5rem;
+            font-size: 4rem;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(135deg, white, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-label {
-            font-size: 1rem;
+            font-size: 1.1rem;
             opacity: 0.9;
+            font-weight: 500;
         }
 
         /* Mode de travail section */
         .work-mode {
-            background: linear-gradient(135deg, #f8f7f4 0%, var(--cream) 100%);
+            background: linear-gradient(180deg, #f8f7f4 0%, var(--cream) 100%);
+            position: relative;
+        }
+
+        .work-mode::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--sage-green), transparent);
         }
 
         .work-mode-grid {
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 3rem;
         }
 
         .work-mode-card {
             background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            transition: all 0.4s ease;
+            padding: 3.5rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.06);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-mode-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--sage-green), var(--gold));
+            transform: scaleX(0);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .work-mode-card:hover::before {
+            transform: scaleX(1);
         }
 
         .work-mode-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            transform: translateY(-15px);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.15);
             border-color: var(--gold);
         }
 
         .work-mode-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
+            font-size: 4rem;
+            margin-bottom: 2rem;
             display: block;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .work-mode-card:hover .work-mode-icon {
+            transform: scale(1.15) rotate(-5deg);
         }
 
         .work-mode-card h3 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--dark-navy);
             margin-bottom: 1.5rem;
         }
@@ -453,8 +771,8 @@
         .work-mode-card p {
             font-size: 1.05rem;
             color: #666;
-            line-height: 1.8;
-            margin-bottom: 2rem;
+            line-height: 1.9;
+            margin-bottom: 2.5rem;
         }
 
         .work-mode-features {
@@ -463,11 +781,17 @@
         }
 
         .work-mode-features li {
-            padding: 0.8rem 0;
-            padding-left: 2rem;
+            padding: 1rem 0;
+            padding-left: 2.5rem;
             position: relative;
             color: #555;
             font-size: 1rem;
+            line-height: 1.6;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .work-mode-features li:last-child {
+            border-bottom: none;
         }
 
         .work-mode-features li::before {
@@ -476,55 +800,95 @@
             left: 0;
             color: var(--sage-green);
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
         }
 
         .highlight-badge {
             display: inline-block;
             background: linear-gradient(135deg, var(--gold) 0%, #d4b889 100%);
             color: white;
-            padding: 0.5rem 1.5rem;
+            padding: 0.7rem 1.8rem;
             border-radius: 50px;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.5px;
-            margin-top: 1rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 20px rgba(200,165,116,0.3);
         }
 
         /* Services Section */
         .services {
-            background: var(--cream);
+            background: var(--white);
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgb(200,165,116)" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.4;
         }
 
         .services-grid {
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 3rem;
+            position: relative;
+            z-index: 1;
         }
 
         .service-card {
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.06);
+            background: linear-gradient(135deg, white 0%, #fafafa 100%);
+            padding: 3.5rem;
+            border-radius: 25px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 5px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(107,133,119,0.05) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.15);
+            border-color: var(--gold);
         }
 
         .service-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
+            font-size: 4rem;
+            margin-bottom: 2rem;
             display: block;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.2) rotate(-10deg);
         }
 
         .service-title {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--dark-navy);
             margin-bottom: 1.5rem;
         }
@@ -532,8 +896,8 @@
         .service-description {
             font-size: 1.05rem;
             color: #666;
-            line-height: 1.8;
-            margin-bottom: 2rem;
+            line-height: 1.9;
+            margin-bottom: 2.5rem;
         }
 
         .service-features {
@@ -542,12 +906,13 @@
         }
 
         .service-features li {
-            padding: 0.8rem 0;
-            padding-left: 2rem;
+            padding: 1rem 0;
+            padding-left: 2.5rem;
             position: relative;
             color: #555;
-            font-size: 1rem;
+            font-size: 0.98rem;
             border-bottom: 1px solid #f0f0f0;
+            line-height: 1.6;
         }
 
         .service-features li:last-child {
@@ -560,59 +925,98 @@
             left: 0;
             color: var(--gold);
             font-weight: bold;
+            font-size: 1.2rem;
         }
 
         /* Contact Section */
         .contact {
-            background: var(--white);
+            background: linear-gradient(135deg, var(--cream) 0%, #e8e5df 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&h=900&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.04;
         }
 
         .contact-container {
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1.5fr;
             gap: 5rem;
-            margin-top: 4rem;
+            margin-top: 5rem;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 4rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
         }
 
         .contact-info h3 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--dark-navy);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
         .info-item {
             display: flex;
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
+            gap: 2rem;
+            margin-bottom: 3rem;
             align-items: flex-start;
+            transition: transform 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateX(10px);
         }
 
         .info-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--sage-green);
             flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(107,133,119,0.1) 0%, rgba(107,133,119,0.05) 100%);
+            border-radius: 15px;
         }
 
         .info-content h4 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--dark-navy);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
         }
 
         .info-content p {
             color: #666;
-            font-size: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.7;
         }
 
         .info-content a {
             color: var(--sage-green);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            font-weight: 600;
         }
 
         .info-content a:hover {
@@ -620,33 +1024,34 @@
         }
 
         .contact-form {
-            background: var(--cream);
-            padding: 3rem;
-            border-radius: 20px;
+            background: white;
+            padding: 4rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
         }
 
         .form-group {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             color: var(--dark-navy);
-            font-weight: 500;
-            font-size: 0.95rem;
+            font-weight: 600;
+            font-size: 1rem;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 1rem 1.5rem;
+            padding: 1.2rem 1.8rem;
             border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-family: 'Montserrat', sans-serif;
+            border-radius: 15px;
+            font-size: 1.05rem;
+            font-family: 'Inter', sans-serif;
             transition: all 0.3s ease;
-            background: white;
+            background: #fafafa;
         }
 
         .form-group input:focus,
@@ -654,18 +1059,32 @@
             outline: none;
             border-color: var(--sage-green);
             box-shadow: 0 0 0 4px rgba(107,133,119,0.1);
+            background: white;
         }
 
         .form-group textarea {
-            min-height: 150px;
+            min-height: 180px;
             resize: vertical;
         }
 
         /* Footer */
         footer {
-            background: var(--dark-navy);
+            background: linear-gradient(135deg, var(--dark-navy) 0%, #1a2532 100%);
             color: white;
-            padding: 4rem 3rem 2rem;
+            padding: 5rem 3rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="2" numOctaves="3"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+            opacity: 0.02;
         }
 
         .footer-container {
@@ -673,28 +1092,33 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 3rem;
+            gap: 5rem;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 1;
         }
 
         .footer-logo {
-            font-size: 2rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: var(--gold);
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, white, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .footer-description {
             color: rgba(255,255,255,0.7);
-            line-height: 1.8;
-            font-size: 0.95rem;
+            line-height: 1.9;
+            font-size: 1rem;
         }
 
         .footer-section h4 {
             color: var(--gold);
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
         }
 
         .footer-links {
@@ -702,33 +1126,37 @@
         }
 
         .footer-links li {
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
 
         .footer-links a {
             color: rgba(255,255,255,0.7);
             text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: inline-block;
         }
 
         .footer-links a:hover {
             color: white;
+            transform: translateX(5px);
         }
 
         .footer-bottom {
             border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 2rem;
+            padding-top: 2.5rem;
             text-align: center;
             color: rgba(255,255,255,0.5);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
         }
 
         /* Animations */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .fade-in.visible {
@@ -737,59 +1165,76 @@
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .hero-container,
             .expertise-content,
             .contact-grid {
                 grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .work-mode-grid,
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
                 gap: 3rem;
             }
 
             .hero-title {
-                font-size: 3.5rem;
+                font-size: 4rem;
             }
 
             .section-title {
-                font-size: 2.5rem;
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 5rem 2rem;
+            }
+
+            .services-grid,
+            .work-mode-grid,
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
             }
 
             .footer-container {
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
-        }
 
-        @media (max-width: 768px) {
-            .nav-container {
-                padding: 1rem 1.5rem;
+            .section-title {
+                font-size: 2.2rem;
             }
 
-            .nav-links {
-                gap: 1.5rem;
-                font-size: 0.85rem;
+            .hero-float-card {
+                display: none;
             }
 
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-
-            section {
-                padding: 4rem 1.5rem;
-            }
-
-            .services-grid,
-            .work-mode-grid {
+            .expertise-image-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
             }
 
-            .expertise-stats {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            .expertise-img:nth-child(1) {
+                grid-column: span 1;
             }
         }
     </style>
@@ -803,7 +1248,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#expertise">Mon Expertise</a></li>
+                <li><a href="#expertise">Expertise</a></li>
                 <li><a href="#mode-travail">Mode de Travail</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -813,30 +1258,58 @@
 
     <!-- Hero Section -->
     <section id="accueil" class="hero">
+        <div class="hero-grain"></div>
+        <div class="floating-shape floating-shape-1"></div>
+        <div class="floating-shape floating-shape-2"></div>
+        
         <div class="hero-container">
             <div class="hero-content">
+                <div class="hero-badge">Votre partenaire administratif</div>
+                
                 <h1 class="hero-title">
-                    Libérez votre temps pour <span class="highlight">ce qui compte vraiment</span>
+                    Libérez votre temps pour 
+                    <span class="highlight">ce qui compte vraiment</span>
                 </h1>
+                
                 <p class="hero-subtitle">
-                    Votre assistant administratif dédié aux professionnels de santé
+                    Externalisation administrative sur-mesure pour professionnels de santé
                 </p>
+                
                 <p class="hero-description">
                     Vous êtes médecin, infirmier·e, kinésithérapeute ou professionnel de santé ? 
                     Votre temps est précieux et doit être consacré à vos patients. Je prends en charge 
                     l'intégralité de votre administration pour vous permettre de vous concentrer sur 
                     votre cœur de métier : soigner et accompagner.
                 </p>
+                
                 <div class="cta-buttons">
-                    <a href="#contact" class="btn btn-primary">Prenons rendez-vous</a>
-                    <a href="#services" class="btn btn-secondary">Découvrir les services</a>
+                    <a href="#contact" class="btn btn-primary">
+                        Demander un audit gratuit
+                        <span>→</span>
+                    </a>
+                    <a href="#services" class="btn btn-secondary">
+                        Découvrir les services
+                    </a>
                 </div>
             </div>
+            
             <div class="hero-visual">
-                <div class="hero-image-container">
-                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop" 
-                         alt="Professionnel de santé" 
+                <div class="hero-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=650&fit=crop&q=80" 
+                         alt="Professionnel de santé au travail" 
                          class="hero-image">
+                </div>
+                
+                <div class="hero-float-card hero-float-card-1">
+                    <span class="float-card-icon">📊</span>
+                    <div class="float-card-title">Gestion optimisée</div>
+                    <p class="float-card-text">Tableaux de bord<br>en temps réel</p>
+                </div>
+                
+                <div class="hero-float-card hero-float-card-2">
+                    <span class="float-card-icon">⚡</span>
+                    <div class="float-card-title">Réactivité</div>
+                    <p class="float-card-text">Réponse sous<br>24h maximum</p>
                 </div>
             </div>
         </div>
@@ -846,14 +1319,27 @@
     <section id="expertise" class="expertise">
         <div class="section-header fade-in">
             <div class="section-label">Mon Expertise</div>
-            <h2 class="section-title">Une professionnelle au service de votre cabinet</h2>
+            <h2 class="section-title">Une professionnelle dédiée à votre réussite</h2>
             <p class="section-description">
                 Forte d'une expérience significative dans le secteur administratif et spécialisée 
                 dans l'accompagnement des professionnels de santé, je connais parfaitement vos enjeux 
                 et vos contraintes quotidiennes.
             </p>
         </div>
+        
         <div class="expertise-content">
+            <div class="expertise-image-grid fade-in">
+                <div class="expertise-img">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=280&fit=crop&q=80" alt="Organisation administrative">
+                </div>
+                <div class="expertise-img">
+                    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=300&h=280&fit=crop&q=80" alt="Gestion digitale">
+                </div>
+                <div class="expertise-img">
+                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=300&h=280&fit=crop&q=80" alt="Accompagnement personnalisé">
+                </div>
+            </div>
+            
             <div class="expertise-text fade-in">
                 <h3>Une expertise complète et personnalisée</h3>
                 <p>
@@ -866,6 +1352,7 @@
                     je m'intègre naturellement dans votre écosystème professionnel pour vous apporter 
                     une solution administrative complète et efficace.
                 </p>
+                
                 <div class="expertise-features">
                     <div class="feature-item">
                         <div class="feature-icon">🎯</div>
@@ -890,23 +1377,27 @@
                     </div>
                 </div>
             </div>
-            <div class="expertise-stats fade-in">
-                <div class="stat-card">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Satisfaction client</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">5+</div>
-                    <div class="stat-label">Années d'expérience</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">24h</div>
-                    <div class="stat-label">Délai de réponse moyen</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">50%</div>
-                    <div class="stat-label">Gain de temps estimé</div>
-                </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item fade-in">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Satisfaction client</div>
+            </div>
+            <div class="stat-item fade-in">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Années d'expérience</div>
+            </div>
+            <div class="stat-item fade-in">
+                <div class="stat-number">24h</div>
+                <div class="stat-label">Délai de réponse</div>
+            </div>
+            <div class="stat-item fade-in">
+                <div class="stat-number">50%</div>
+                <div class="stat-label">Gain de temps</div>
             </div>
         </div>
     </section>
@@ -922,26 +1413,26 @@
                 de qualité et de professionnalisme.
             </p>
         </div>
+        
         <div class="work-mode-grid">
             <div class="work-mode-card fade-in">
                 <span class="work-mode-icon">💻</span>
                 <h3>Travail à distance</h3>
                 <p>
-                    Grâce à l'utilisation de <strong>RustDesk</strong>, un outil professionnel de prise en main 
-                    à distance ultra-sécurisé, je peux accéder à votre système comme si j'étais physiquement 
-                    présente dans votre cabinet. Cette technologie me permet d'intervenir en temps réel sur vos 
-                    logiciels métiers, de traiter vos documents, et de gérer l'ensemble de vos tâches administratives 
-                    exactement comme si j'étais à vos côtés.
+                    Grâce à <strong>RustDesk</strong>, un outil professionnel de prise en main à distance 
+                    ultra-sécurisé, je peux accéder à votre système comme si j'étais physiquement présente 
+                    dans votre cabinet. Cette technologie me permet d'intervenir en temps réel sur vos logiciels 
+                    métiers, exactement comme si j'étais à vos côtés.
                 </p>
                 <ul class="work-mode-features">
-                    <li>Connexion sécurisée et cryptée à votre poste de travail</li>
-                    <li>Intervention en temps réel sur vos logiciels professionnels</li>
+                    <li>Connexion sécurisée et cryptée à votre poste</li>
+                    <li>Intervention en temps réel sur vos logiciels</li>
                     <li>Accès aux mêmes outils que sur place</li>
-                    <li>Pas de déplacement nécessaire = économies de temps et d'argent</li>
+                    <li>Économies de temps et d'argent</li>
                     <li>Disponibilité étendue selon vos besoins</li>
                     <li>Réactivité immédiate en cas d'urgence</li>
                 </ul>
-                <span class="highlight-badge">Solution privilégiée pour un suivi continu</span>
+                <span class="highlight-badge">Solution privilégiée</span>
             </div>
             
             <div class="work-mode-card fade-in">
@@ -949,20 +1440,19 @@
                 <h3>Journées en entreprise</h3>
                 <p>
                     Pour bien démarrer notre collaboration ou pour des besoins spécifiques, je me déplace 
-                    directement dans votre cabinet. Ces journées sur site me permettent d'évaluer précisément 
-                    vos besoins, de comprendre votre organisation, de configurer les outils, et de former 
-                    votre équipe si nécessaire.
+                    directement dans votre cabinet. Ces journées sur site permettent d'évaluer précisément 
+                    vos besoins, de configurer les outils, et de former votre équipe.
                 </p>
                 <ul class="work-mode-features">
-                    <li>Audit complet de votre organisation administrative</li>
-                    <li>Évaluation personnalisée de vos besoins réels</li>
-                    <li>Installation et configuration des outils de travail</li>
-                    <li>Formation de votre équipe aux nouveaux processus</li>
-                    <li>Mise en place des procédures et protocoles</li>
+                    <li>Audit complet de votre organisation</li>
+                    <li>Évaluation personnalisée de vos besoins</li>
+                    <li>Installation et configuration des outils</li>
+                    <li>Formation de votre équipe</li>
+                    <li>Mise en place des procédures</li>
                     <li>Diagnostic de votre système actuel</li>
-                    <li>Réorganisation et optimisation des flux de travail</li>
+                    <li>Optimisation des flux de travail</li>
                 </ul>
-                <span class="highlight-badge">Idéal pour le démarrage et les formations</span>
+                <span class="highlight-badge">Idéal pour le démarrage</span>
             </div>
             
             <div class="work-mode-card fade-in">
@@ -971,18 +1461,17 @@
                 <p>
                     La meilleure des deux approches : nous commençons par une ou plusieurs journées en présentiel 
                     pour poser les bases, puis je continue à vous accompagner à distance au quotidien. Cette formule 
-                    combine l'efficacité de la présence physique initiale avec la flexibilité et la réactivité 
-                    du travail à distance.
+                    combine l'efficacité de la présence physique initiale avec la flexibilité du travail à distance.
                 </p>
                 <ul class="work-mode-features">
-                    <li>Phase de démarrage sur site pour un accompagnement optimal</li>
-                    <li>Transition progressive vers le travail à distance</li>
-                    <li>Suivi régulier via RustDesk pour les tâches quotidiennes</li>
-                    <li>Possibilité de journées ponctuelles sur site selon les besoins</li>
-                    <li>Flexibilité maximale dans l'organisation</li>
-                    <li>Optimisation des coûts tout en gardant un service premium</li>
+                    <li>Phase de démarrage sur site optimale</li>
+                    <li>Transition progressive vers le distant</li>
+                    <li>Suivi régulier via RustDesk</li>
+                    <li>Journées ponctuelles selon besoins</li>
+                    <li>Flexibilité maximale</li>
+                    <li>Optimisation des coûts</li>
                 </ul>
-                <span class="highlight-badge">La solution la plus complète et flexible</span>
+                <span class="highlight-badge">Solution la plus complète</span>
             </div>
         </div>
     </section>
@@ -994,118 +1483,110 @@
             <h2 class="section-title">Des solutions complètes pour toute votre administration</h2>
             <p class="section-description">
                 De la gestion quotidienne aux tâches les plus complexes, je prends en charge l'ensemble 
-                de vos besoins administratifs pour vous permettre de vous concentrer sur l'essentiel : vos patients.
+                de vos besoins administratifs pour vous permettre de vous concentrer sur vos patients.
             </p>
         </div>
+        
         <div class="services-grid">
             <div class="service-card fade-in">
                 <div class="service-icon">🗂️</div>
-                <h3 class="service-title">Gestion Administrative Complète</h3>
+                <h3 class="service-title">Gestion Administrative</h3>
                 <p class="service-description">
-                    Je prends en charge l'intégralité de votre gestion administrative quotidienne : traitement 
-                    du courrier physique et électronique, gestion et mise à jour de vos dossiers patients, 
-                    archivage numérique sécurisé conforme aux normes RGPD, et classement méthodique de tous 
-                    vos documents professionnels.
+                    Prise en charge complète de votre gestion administrative quotidienne : traitement 
+                    du courrier, gestion des dossiers patients, archivage numérique sécurisé conforme RGPD.
                 </p>
                 <ul class="service-features">
-                    <li>Tri, traitement et réponse au courrier et aux emails professionnels</li>
-                    <li>Création et mise à jour des dossiers patients dans votre logiciel métier</li>
-                    <li>Numérisation et archivage sécurisé de vos documents</li>
-                    <li>Organisation et classement de votre documentation professionnelle</li>
-                    <li>Gestion des demandes d'informations et de documents</li>
-                    <li>Suivi des échéances administratives importantes</li>
+                    <li>Tri et traitement du courrier et emails</li>
+                    <li>Création et mise à jour des dossiers patients</li>
+                    <li>Numérisation et archivage sécurisé</li>
+                    <li>Organisation de votre documentation</li>
+                    <li>Gestion des demandes d'informations</li>
+                    <li>Suivi des échéances importantes</li>
                 </ul>
             </div>
             
             <div class="service-card fade-in">
                 <div class="service-icon">📅</div>
-                <h3 class="service-title">Gestion d'Agenda & Planning</h3>
+                <h3 class="service-title">Gestion d'Agenda</h3>
                 <p class="service-description">
-                    Optimisation complète de votre emploi du temps avec gestion intelligente de vos rendez-vous, 
-                    coordination des différents agendas pour les cabinets de groupe, rappels automatiques aux patients, 
-                    et gestion proactive des annulations et reports pour limiter les créneaux vides.
+                    Optimisation complète de votre emploi du temps avec gestion intelligente des rendez-vous, 
+                    rappels automatiques, et gestion proactive des annulations.
                 </p>
                 <ul class="service-features">
-                    <li>Prise de rendez-vous téléphonique et par email</li>
-                    <li>Envoi de rappels automatiques aux patients (SMS/Email)</li>
-                    <li>Gestion optimisée des annulations et reprogrammations</li>
-                    <li>Coordination des plannings en cabinet de groupe</li>
-                    <li>Blocage de créneaux pour formations ou absences</li>
-                    <li>Statistiques de fréquentation et taux de remplissage</li>
+                    <li>Prise de rendez-vous téléphone et email</li>
+                    <li>Envoi de rappels automatiques (SMS/Email)</li>
+                    <li>Gestion des annulations et reports</li>
+                    <li>Coordination des plannings groupe</li>
+                    <li>Blocage de créneaux formations/absences</li>
+                    <li>Statistiques de fréquentation</li>
                 </ul>
             </div>
             
             <div class="service-card fade-in">
                 <div class="service-icon">💰</div>
-                <h3 class="service-title">Facturation & Suivi Financier</h3>
+                <h3 class="service-title">Facturation & Suivi</h3>
                 <p class="service-description">
-                    Gestion rigoureuse et complète de votre facturation : établissement des factures conformes, 
-                    transmission sécurisée aux organismes de santé, suivi précis des paiements, relances 
-                    professionnelles des impayés, et gestion experte du tiers payant et des relations avec 
-                    les mutuelles.
+                    Gestion rigoureuse de votre facturation : établissement des factures, transmission 
+                    aux organismes, suivi des paiements et relances professionnelles.
                 </p>
                 <ul class="service-features">
-                    <li>Création et envoi des factures aux patients et organismes</li>
-                    <li>Gestion complète du tiers payant (CPAM, mutuelles)</li>
-                    <li>Suivi détaillé des encaissements et des impayés</li>
-                    <li>Relances amiables et professionnelles des retards de paiement</li>
-                    <li>Rapprochements bancaires et suivi de trésorerie</li>
-                    <li>Préparation des documents comptables pour votre expert-comptable</li>
+                    <li>Création et envoi des factures</li>
+                    <li>Gestion complète du tiers payant</li>
+                    <li>Suivi des encaissements et impayés</li>
+                    <li>Relances amiables professionnelles</li>
+                    <li>Rapprochements bancaires</li>
+                    <li>Préparation documents comptables</li>
                 </ul>
             </div>
             
             <div class="service-card fade-in">
                 <div class="service-icon">📞</div>
-                <h3 class="service-title">Accueil Téléphonique Professionnel</h3>
+                <h3 class="service-title">Accueil Téléphonique</h3>
                 <p class="service-description">
-                    Service de permanence téléphonique dédié pour ne manquer aucun appel important. 
-                    Réception professionnelle des appels, filtrage intelligent, prise de messages détaillés, 
-                    et renseignements aux patients dans le respect de votre protocole de communication.
+                    Permanence téléphonique professionnelle pour ne manquer aucun appel important. 
+                    Réception, filtrage et prise de messages détaillés.
                 </p>
                 <ul class="service-features">
-                    <li>Réception et filtrage des appels entrants</li>
+                    <li>Réception et filtrage des appels</li>
                     <li>Prise de rendez-vous par téléphone</li>
-                    <li>Prise de messages détaillés et transmission immédiate</li>
-                    <li>Renseignements aux patients (horaires, tarifs, modalités)</li>
-                    <li>Gestion des urgences selon votre protocole</li>
-                    <li>Service disponible selon vos plages horaires définies</li>
+                    <li>Messages détaillés et transmission</li>
+                    <li>Renseignements aux patients</li>
+                    <li>Gestion des urgences selon protocole</li>
+                    <li>Service sur vos plages horaires</li>
                 </ul>
             </div>
             
             <div class="service-card fade-in">
                 <div class="service-icon">🔄</div>
-                <h3 class="service-title">Digitalisation & Modernisation</h3>
+                <h3 class="service-title">Digitalisation</h3>
                 <p class="service-description">
-                    Accompagnement complet dans votre transition numérique : numérisation de vos archives 
-                    papier, mise en place et paramétrage d'outils digitaux adaptés à votre pratique, 
-                    formation personnalisée aux nouveaux outils, et optimisation continue de vos processus 
-                    pour gagner en efficacité.
+                    Accompagnement complet dans votre transition numérique : numérisation des archives, 
+                    mise en place d'outils digitaux et formation personnalisée.
                 </p>
                 <ul class="service-features">
-                    <li>Numérisation complète de vos archives et documents</li>
-                    <li>Sélection et déploiement d'outils adaptés à vos besoins</li>
-                    <li>Paramétrage de votre logiciel métier et optimisation</li>
-                    <li>Formation pratique à l'utilisation des nouveaux outils</li>
-                    <li>Mise en place de processus digitaux efficients</li>
-                    <li>Support technique et accompagnement au changement</li>
+                    <li>Numérisation complète de vos archives</li>
+                    <li>Sélection d'outils adaptés à vos besoins</li>
+                    <li>Paramétrage et optimisation logiciels</li>
+                    <li>Formation pratique aux nouveaux outils</li>
+                    <li>Processus digitaux efficients</li>
+                    <li>Support technique et accompagnement</li>
                 </ul>
             </div>
             
             <div class="service-card fade-in">
                 <div class="service-icon">📊</div>
-                <h3 class="service-title">Reporting & Tableaux de Bord</h3>
+                <h3 class="service-title">Reporting</h3>
                 <p class="service-description">
-                    Pilotage de votre activité grâce à des tableaux de bord clairs et personnalisés. 
-                    Statistiques détaillées de votre activité, analyse des performances, suivi des indicateurs 
-                    clés, et recommandations concrètes pour optimiser la gestion de votre cabinet.
+                    Pilotage de votre activité grâce à des tableaux de bord clairs. Statistiques détaillées, 
+                    analyses de performance et recommandations concrètes.
                 </p>
                 <ul class="service-features">
                     <li>Tableaux de bord mensuels personnalisés</li>
-                    <li>Statistiques détaillées d'activité et de fréquentation</li>
-                    <li>Analyse du chiffre d'affaires et de la rentabilité</li>
-                    <li>Suivi des taux de remplissage et d'occupation</li>
-                    <li>Identification des tendances et opportunités</li>
-                    <li>Recommandations stratégiques basées sur les données</li>
+                    <li>Statistiques d'activité détaillées</li>
+                    <li>Analyse du chiffre d'affaires</li>
+                    <li>Suivi des taux de remplissage</li>
+                    <li>Identification des tendances</li>
+                    <li>Recommandations stratégiques</li>
                 </ul>
             </div>
         </div>
@@ -1119,13 +1600,14 @@
                 <h2 class="section-title">Discutons de votre projet</h2>
                 <p class="section-description">
                     Vous souhaitez alléger votre charge administrative et vous recentrer sur votre cœur de métier ? 
-                    Contactez-moi pour un premier échange sans engagement. Ensemble, nous analyserons vos besoins 
-                    et définirons la solution la plus adaptée à votre cabinet.
+                    Contactez-moi pour un premier échange sans engagement.
                 </p>
             </div>
+            
             <div class="contact-grid">
-                <div class="contact-info">
+                <div class="contact-info fade-in">
                     <h3>Prenons contact</h3>
+                    
                     <div class="info-item">
                         <div class="info-icon">📧</div>
                         <div class="info-content">
@@ -1133,38 +1615,42 @@
                             <p><a href="mailto:contact@docetvita.fr">contact@docetvita.fr</a></p>
                         </div>
                     </div>
+                    
                     <div class="info-item">
                         <div class="info-icon">📱</div>
                         <div class="info-content">
                             <h4>Téléphone</h4>
                             <p>Sur rendez-vous uniquement</p>
                             <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #888;">
-                                Pour garantir ma disponibilité et vous offrir toute mon attention
+                                Pour garantir ma disponibilité
                             </p>
                         </div>
                     </div>
+                    
                     <div class="info-item">
                         <div class="info-icon">🕒</div>
                         <div class="info-content">
                             <h4>Disponibilité</h4>
-                            <p>Lundi - Vendredi : 9h00 - 18h00</p>
+                            <p>Lun - Ven : 9h00 - 18h00</p>
                             <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #888;">
-                                Flexibilité possible selon vos contraintes
+                                Flexibilité selon vos contraintes
                             </p>
                         </div>
                     </div>
+                    
                     <div class="info-item">
                         <div class="info-icon">🎯</div>
                         <div class="info-content">
                             <h4>Premier contact</h4>
                             <p>Audit gratuit de vos besoins</p>
                             <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #888;">
-                                Échange de 30 minutes pour comprendre votre situation
+                                Échange de 30 minutes offert
                             </p>
                         </div>
                     </div>
                 </div>
-                <form class="contact-form">
+                
+                <form class="contact-form fade-in">
                     <div class="form-group">
                         <label for="name">Nom et Prénom *</label>
                         <input type="text" id="name" placeholder="Dr. Marie Dupont" required>
@@ -1179,10 +1665,13 @@
                     </div>
                     <div class="form-group">
                         <label for="message">Votre message *</label>
-                        <textarea id="message" placeholder="Parlez-moi de vos besoins, de votre cabinet, et de ce qui vous prendrait le plus de temps au quotidien..." required></textarea>
+                        <textarea id="message" placeholder="Parlez-moi de vos besoins..." required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Envoyer le message</button>
-                    <p style="font-size: 0.85rem; color: #888; margin-top: 1rem; text-align: center;">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        Envoyer le message
+                        <span>→</span>
+                    </button>
+                    <p style="font-size: 0.85rem; color: #888; margin-top: 1.5rem; text-align: center;">
                         Réponse garantie sous 24h ouvrées
                     </p>
                 </form>
@@ -1198,15 +1687,14 @@
                 <p class="footer-description">
                     Votre partenaire de confiance pour l'externalisation administrative 
                     des professionnels de santé. Je vous accompagne au quotidien pour simplifier 
-                    votre gestion administrative et vous permettre de vous concentrer sur l'essentiel : 
-                    vos patients et votre pratique médicale.
+                    votre gestion et vous permettre de vous concentrer sur l'essentiel.
                 </p>
             </div>
             <div class="footer-section">
                 <h4>Navigation</h4>
                 <ul class="footer-links">
                     <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#expertise">Mon Expertise</a></li>
+                    <li><a href="#expertise">Expertise</a></li>
                     <li><a href="#mode-travail">Mode de Travail</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -1216,14 +1704,14 @@
                 <h4>Informations</h4>
                 <ul class="footer-links">
                     <li><a href="#mentions">Mentions Légales</a></li>
-                    <li><a href="#confidentialite">Politique de Confidentialité</a></li>
+                    <li><a href="#confidentialite">Confidentialité</a></li>
                     <li><a href="#cgv">Conditions Générales</a></li>
                     <li><a href="#rgpd">Protection des Données</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 DocEtVita - Tous droits réservés | Externalisation administrative pour professionnels de santé</p>
+            <p>&copy; 2026 DocEtVita - Tous droits réservés</p>
         </div>
     </footer>
 
@@ -1244,14 +1732,16 @@
 
         // Intersection Observer for fade-in animations
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.15,
+            rootMargin: '0px 0px -80px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
                 }
             });
         }, observerOptions);
@@ -1267,16 +1757,32 @@
             this.reset();
         });
 
-        // Navbar background on scroll
+        // Enhanced navbar on scroll
+        let lastScroll = 0;
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(255, 255, 255, 0.98)';
-                nav.style.boxShadow = '0 2px 30px rgba(0,0,0,0.1)';
-            } else {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
                 nav.style.background = 'rgba(255, 255, 255, 0.95)';
-                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
+                nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.85)';
+                nav.style.boxShadow = '0 1px 0 rgba(0,0,0,0.05)';
             }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.floating-shape');
+            
+            parallaxElements.forEach((el, index) => {
+                const speed = 0.5 + (index * 0.2);
+                el.style.transform = `translateY(${scrolled * speed}px)`;
+            });
         });
     </script>
 </body>
