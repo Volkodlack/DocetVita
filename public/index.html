@@ -1,245 +1,417 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Doc & Vita – Gestion administrative externalisée</title>
-  <meta name="description" content="Doc & Vita accompagne les professionnels de santé et entreprises dans la gestion administrative externalisée, la gestion du tiers payant et l'assistance à distance sécurisée." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #1f2937;
-      --secondary: #2563eb;
-      --accent: #22c55e;
-      --bg: #f9fafb;
-      --text: #374151;
-      --card: #ffffff;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocEtVita - Externalisation Administrative & Tiers Payant</title>
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
+    <style>
+        :root {
+            --sage-green: #6b8577;
+            --dark-navy: #2c4254;
+            --gold: #c8a574;
+            --cream: #f5f3ef;
+            --white: #ffffff;
+            --text-dark: #1a1a1a;
+            --light-green: #8fa397;
+        }
 
-    header {
-      background: linear-gradient(135deg, var(--primary), #111827);
-      color: white;
-      padding: 3rem 1.5rem;
-    }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    header nav {
-      max-width: 1200px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
 
-    header nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 1.5rem;
-      font-weight: 500;
-    }
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
 
-    .hero {
-      max-width: 1200px;
-      margin: 3rem auto 0;
-      text-align: center;
-    }
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
 
-    .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-    }
+        .nav-container {
+            max-width: 1400px;
+            margin: auto;
+            padding: 1.2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .hero p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
+        .logo-text {
+            font-size: 1.8rem;
+            color: var(--dark-navy);
+        }
 
-    section {
-      padding: 4rem 1.5rem;
-      max-width: 1200px;
-      margin: auto;
-    }
+        .logo-text .vita { color: var(--sage-green); }
 
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      color: var(--primary);
-    }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            position: relative;
+        }
 
-    .card {
-      background: var(--card);
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
 
-    .card h3 {
-      margin-bottom: 1rem;
-      color: var(--secondary);
-    }
+        .nav-links a:hover::after { width: 100%; }
 
-    .badge {
-      display: inline-block;
-      background: rgba(37,99,235,0.1);
-      color: var(--secondary);
-      padding: 0.3rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      margin-bottom: 1rem;
-    }
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            background: linear-gradient(135deg, var(--cream), #e8e5df);
+        }
 
-    footer {
-      background: var(--primary);
-      color: #d1d5db;
-      padding: 3rem 1.5rem;
-    }
+        .hero-container {
+            max-width: 1400px;
+            margin: auto;
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 5rem;
+        }
 
-    footer .footer-grid {
-      max-width: 1200px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-    }
+        .hero-title {
+            font-size: 4rem;
+            color: var(--dark-navy);
+            margin-bottom: 1.5rem;
+        }
 
-    footer a {
-      color: #d1d5db;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
+        .hero-title span { color: var(--sage-green); font-style: italic; }
 
-    .cta {
-      background: linear-gradient(135deg, var(--secondary), #1d4ed8);
-      color: white;
-      border-radius: 1.5rem;
-      padding: 3rem;
-      text-align: center;
-    }
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
 
-    .cta a {
-      display: inline-block;
-      margin-top: 1.5rem;
-      background: white;
-      color: var(--secondary);
-      padding: 0.8rem 1.5rem;
-      border-radius: 999px;
-      font-weight: 600;
-      text-decoration: none;
-    }
-  </style>
+        .hero-description {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--dark-navy);
+            color: white;
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--sage-green);
+            color: var(--sage-green);
+            margin-left: 1rem;
+        }
+
+        /* SECTIONS */
+        section { padding: 8rem 3rem; }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: auto auto 5rem;
+        }
+
+        .section-label {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: var(--dark-navy);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-description { color: #666; }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+        }
+
+        .service-title {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--dark-navy);
+        }
+
+        .service-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .service-features li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.7rem;
+            position: relative;
+        }
+
+        .service-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--sage-green);
+        }
+
+        /* BENEFITS */
+        .benefits {
+            background: linear-gradient(135deg, var(--dark-navy), #1f3244);
+            color: white;
+        }
+
+        .benefits .section-title { color: white; }
+
+        .benefits-container {
+            max-width: 1400px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+            gap: 2.5rem;
+        }
+
+        .benefit-card {
+            background: rgba(255,255,255,0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+        }
+
+        /* CONTACT */
+        .contact-container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 4rem;
+            border-radius: 30px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 1rem;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+        }
+
+        footer {
+            background: var(--dark-navy);
+            color: white;
+            padding: 4rem 3rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 900px) {
+            .hero-container,
+            .contact-grid,
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<header>
-  <nav>
-    <strong>Doc & Vita</strong>
-    <div>
-      <a href="#services">Services</a>
-      <a href="#tierspayant">Tiers payant</a>
-      <a href="#securite">Sécurité</a>
-      <a href="#contact">Contact</a>
+<nav>
+    <div class="nav-container">
+        <div class="logo-text">DocEt<span class="vita">Vita</span></div>
+        <ul class="nav-links">
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#tiers">Tiers Payant</a></li>
+            <li><a href="#avantages">Avantages</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </div>
-  </nav>
-  <div class="hero">
-    <h1>Gestion administrative externalisée</h1>
-    <p>Libérez-vous des contraintes administratives. Concentrez-vous sur votre cœur de métier.</p>
-  </div>
-</header>
+</nav>
+
+<section id="accueil" class="hero">
+    <div class="hero-container">
+        <div>
+            <h1 class="hero-title">La vie sans <span>paperasse</span></h1>
+            <p class="hero-subtitle">Externalisation administrative & tiers payant</p>
+            <p class="hero-description">
+                DocEtVita accompagne les professionnels de santé dans la gestion administrative externalisée :
+                facturation, tiers payant, assistance à distance sécurisée via RustDesk et suivi quotidien.
+            </p>
+            <a href="#contact" class="btn btn-primary">Découvrir nos services</a>
+            <a href="#services" class="btn btn-secondary">En savoir plus</a>
+        </div>
+    </div>
+</section>
 
 <section id="services">
-  <h2>Nos services</h2>
-  <div class="grid">
-    <div class="card">
-      <span class="badge">Externalisation</span>
-      <h3>Gestion administrative complète</h3>
-      <p>Traitement des dossiers, facturation, suivi des paiements, relances et archivage numérique. Une solution clé en main, flexible et adaptée à votre activité.</p>
+    <div class="section-header">
+        <div class="section-label">Nos services</div>
+        <h2 class="section-title">Une gestion administrative déléguée</h2>
+        <p class="section-description">Nous intervenons comme votre service administratif externalisé.</p>
     </div>
-    <div class="card">
-      <span class="badge">Santé</span>
-      <h3>Gestion du tiers payant</h3>
-      <p>Prise en charge intégrale des flux AMO/AMC, suivi des rejets, corrections et relations avec les organismes payeurs.</p>
+
+    <div class="services-grid">
+        <div class="service-card">
+            <h3 class="service-title">Gestion administrative complète</h3>
+            <p>Traitement des documents, courriers, dossiers patients et obligations administratives.</p>
+            <ul class="service-features">
+                <li>Dématérialisation</li>
+                <li>Classement sécurisé</li>
+                <li>Archivage conforme RGPD</li>
+            </ul>
+        </div>
+
+        <div class="service-card">
+            <h3 class="service-title">Gestion du tiers payant</h3>
+            <p>Externalisation complète du suivi AMO / AMC.</p>
+            <ul class="service-features">
+                <li>Traitement des rejets</li>
+                <li>Relances organismes</li>
+                <li>Réduction des impayés</li>
+            </ul>
+        </div>
+
+        <div class="service-card">
+            <h3 class="service-title">Assistance à distance sécurisée</h3>
+            <p>Intervention directe sur vos outils métiers via RustDesk.</p>
+            <ul class="service-features">
+                <li>Connexion chiffrée</li>
+                <li>Accès contrôlé</li>
+                <li>Traçabilité complète</li>
+            </ul>
+        </div>
     </div>
-    <div class="card">
-      <span class="badge">Support</span>
-      <h3>Assistance administrative à distance</h3>
-      <p>Un support réactif et humain pour accompagner vos équipes au quotidien, sans embauche ni contrainte salariale.</p>
-    </div>
-  </div>
 </section>
 
-<section id="tierspayant">
-  <h2>Gestion du tiers payant à distance</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Connexion sécurisée via RustDesk</h3>
-      <p>Nous intervenons directement sur vos outils métiers grâce à RustDesk, une solution open-source de prise en main à distance, sécurisée et chiffrée.</p>
+<section id="avantages" class="benefits">
+    <div class="section-header">
+        <div class="section-label">Pourquoi DocEtVita</div>
+        <h2 class="section-title">Les bénéfices pour votre cabinet</h2>
     </div>
-    <div class="card">
-      <h3>Continuité d'activité</h3>
-      <p>En cas d'absence, de surcharge ou de retard de paiement, nous assurons la continuité de votre gestion sans interruption.</p>
+
+    <div class="benefits-container">
+        <div class="benefit-card">Gain de temps médical</div>
+        <div class="benefit-card">Sécurité & conformité</div>
+        <div class="benefit-card">Aucun recrutement</div>
+        <div class="benefit-card">Service humain dédié</div>
     </div>
-  </div>
 </section>
 
-<section id="securite">
-  <h2>Sécurité & conformité</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Données protégées</h3>
-      <p>Accès contrôlés, connexions chiffrées, confidentialité stricte et respect du RGPD. Vos données restent sous votre contrôle.</p>
-    </div>
-    <div class="card">
-      <h3>Infrastructure maîtrisée</h3>
-      <p>Utilisation d'outils sécurisés, traçabilité des actions et procédures internes garantissant fiabilité et transparence.</p>
-    </div>
-  </div>
-</section>
+<section id="contact">
+    <div class="contact-container">
+        <div class="section-header">
+            <div class="section-label">Contact</div>
+            <h2 class="section-title">Parlons de votre projet</h2>
+        </div>
 
-<section class="cta" id="contact">
-  <h2>Parlons de votre organisation</h2>
-  <p>Chaque structure est unique. Contactez-nous pour une étude personnalisée de vos besoins administratifs.</p>
-  <a href="mailto:contact@docetvita.fr">Contactez-nous</a>
+        <div class="contact-grid">
+            <div>
+                <p><strong>Email :</strong> contact@docetvita.fr</p>
+                <p><strong>Téléphone :</strong> 01 23 45 67 89</p>
+            </div>
+            <form class="contact-form">
+                <input type="text" placeholder="Nom complet">
+                <input type="email" placeholder="Email professionnel">
+                <textarea placeholder="Votre message"></textarea>
+                <button class="btn btn-primary" type="submit">Envoyer</button>
+            </form>
+        </div>
+    </div>
 </section>
 
 <footer>
-  <div class="footer-grid">
-    <div>
-      <strong>Doc & Vita</strong>
-      <p>Gestion administrative externalisée<br>Solutions sur mesure</p>
+    <div class="footer-container">
+        <div>
+            <h3>DocEt<span class="vita">Vita</span></h3>
+            <p>Externalisation administrative des professionnels de santé.</p>
+        </div>
+        <div>
+            <h4>Navigation</h4>
+            <ul>
+                <li>Accueil</li>
+                <li>Services</li>
+                <li>Contact</li>
+            </ul>
+        </div>
+        <div>
+            <h4>Légal</h4>
+            <ul>
+                <li>Mentions légales</li>
+                <li>RGPD</li>
+            </ul>
+        </div>
     </div>
-    <div>
-      <strong>Navigation</strong>
-      <a href="#services">Services</a>
-      <a href="#tierspayant">Tiers payant</a>
-      <a href="#securite">Sécurité</a>
-    </div>
-    <div>
-      <strong>Informations</strong>
-      <a href="#">Mentions légales</a>
-      <a href="#">Politique de confidentialité</a>
-    </div>
-  </div>
+    <div class="footer-bottom">© 2026 DocEtVita</div>
 </footer>
 
 </body>
