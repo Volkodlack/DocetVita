@@ -1,1021 +1,326 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocEtVita - Externalisation Administrative Santé</title>
-    <link rel="icon" type="image/png" href="/mnt/user-data/uploads/LOGO.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --sage-green: #6b8577;
-            --dark-navy: #2c4254;
-            --gold: #c8a574;
-            --cream: #f5f3ef;
-            --white: #ffffff;
-            --text-dark: #1a1a1a;
-            --light-green: #8fa397;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--text-dark);
-            line-height: 1.7;
-            overflow-x: hidden;
-            background: var(--cream);
-        }
-
-        h1, h2, h3, h4 {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-            line-height: 1.2;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
-            animation: slideDown 0.6s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0.8rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-nav {
-            height: 70px;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-nav img {
-            height: 100%;
-            width: auto;
-            object-fit: contain;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 400;
-            font-size: 0.95rem;
-            letter-spacing: 0.3px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, var(--cream) 0%, #e8e5df 100%);
-            padding-top: 100px;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(107,133,119,0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, -30px) rotate(120deg); }
-            66% { transform: translate(-20px, 20px) rotate(240deg); }
-        }
-
-        .hero-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 3rem;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 5rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content {
-            animation: fadeInLeft 1s ease-out;
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .hero-title {
-            font-size: 4.5rem;
-            color: var(--dark-navy);
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-        }
-
-        .hero-title .highlight {
-            color: var(--sage-green);
-            font-style: italic;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--gold);
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 400;
-            font-style: italic;
-            margin-bottom: 2rem;
-        }
-
-        .hero-description {
-            font-size: 1.1rem;
-            color: #555;
-            margin-bottom: 3rem;
-            line-height: 1.8;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-primary {
-            background: var(--dark-navy);
-            color: white;
-            box-shadow: 0 10px 30px rgba(44,66,84,0.2);
-        }
-
-        .btn-primary:hover {
-            background: #1f3244;
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(44,66,84,0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--sage-green);
-            border: 2px solid var(--sage-green);
-        }
-
-        .btn-secondary:hover {
-            background: var(--sage-green);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .hero-visual {
-            position: relative;
-            animation: fadeInRight 1s ease-out 0.3s both;
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .visual-card {
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .visual-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--sage-green), var(--gold), var(--dark-navy));
-        }
-
-        .visual-icon {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 2rem;
-            background: linear-gradient(135deg, var(--sage-green), var(--light-green));
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3.5rem;
-            transform: rotate(-5deg);
-            box-shadow: 0 10px 30px rgba(107,133,119,0.3);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 700;
-            color: var(--dark-navy);
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #666;
-            margin-top: 0.5rem;
-        }
-
-        /* Expertise Section */
-        .expertise {
-            padding: 8rem 3rem;
-            background: white;
-        }
-
-        .expertise-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
-        }
-
-        .expertise-content h2 {
-            font-size: 3rem;
-            color: var(--dark-navy);
-            margin-bottom: 2rem;
-        }
-
-        .expertise-content p {
-            font-size: 1.1rem;
-            color: #555;
-            line-height: 1.9;
-            margin-bottom: 1.5rem;
-        }
-
-        .expertise-highlight {
-            background: linear-gradient(135deg, var(--sage-green), var(--light-green));
-            color: white;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(107,133,119,0.2);
-        }
-
-        .expertise-highlight h3 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .expertise-list {
-            list-style: none;
-        }
-
-        .expertise-list li {
-            padding: 1rem 0;
-            padding-left: 2rem;
-            position: relative;
-            font-size: 1.05rem;
-        }
-
-        .expertise-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--gold);
-            font-weight: bold;
-            font-size: 1.3rem;
-        }
-
-        /* Services Section */
-        .services {
-            padding: 8rem 3rem;
-            background: var(--cream);
-            position: relative;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 5rem;
-        }
-
-        .section-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--gold);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .section-title {
-            font-size: 3.5rem;
-            color: var(--dark-navy);
-            margin-bottom: 1.5rem;
-        }
-
-        .section-description {
-            font-size: 1.1rem;
-            color: #666;
-            line-height: 1.8;
-        }
-
-        .services-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-        }
-
-        .service-card {
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(200,165,116,0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .service-card:hover::before {
-            left: 100%;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-        }
-
-        .service-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--sage-green), var(--light-green));
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 20px rgba(107,133,119,0.2);
-        }
-
-        .service-title {
-            font-size: 1.8rem;
-            color: var(--dark-navy);
-            margin-bottom: 1rem;
-        }
-
-        .service-description {
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-features {
-            list-style: none;
-            margin-top: 1.5rem;
-        }
-
-        .service-features li {
-            padding: 0.7rem 0;
-            padding-left: 1.8rem;
-            position: relative;
-            color: #555;
-        }
-
-        .service-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--sage-green);
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 8rem 3rem;
-            background: white;
-        }
-
-        .contact-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: var(--cream);
-            border-radius: 30px;
-            padding: 4rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-top: 3rem;
-        }
-
-        .contact-info h3 {
-            font-size: 2rem;
-            color: var(--dark-navy);
-            margin-bottom: 2rem;
-        }
-
-        .info-item {
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .info-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--sage-green);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            flex-shrink: 0;
-        }
-
-        .info-content h4 {
-            font-size: 1rem;
-            color: var(--dark-navy);
-            margin-bottom: 0.3rem;
-        }
-
-        .info-content p {
-            color: #666;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--dark-navy);
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            padding: 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--sage-green);
-            box-shadow: 0 0 0 3px rgba(107,133,119,0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark-navy);
-            color: white;
-            padding: 4rem 3rem 2rem;
-        }
-
-        .footer-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-logo {
-            font-size: 2rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .footer-description {
-            color: rgba(255,255,255,0.7);
-            line-height: 1.8;
-            margin-top: 1rem;
-        }
-
-        .footer-section h4 {
-            color: var(--gold);
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--gold);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.5);
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            .nav-container {
-                padding: 1rem 2rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hero-container,
-            .expertise-container {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-                padding: 2rem;
-            }
-
-            .hero-title {
-                font-size: 3rem;
-            }
-
-            .contact-grid,
-            .footer-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .section-title {
-                font-size: 2.5rem;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>DocEtVita – Externalisation Administrative Santé</title>
+  <meta name="description" content="DocEtVita accompagne les professionnels de santé dans l’externalisation administrative pour plus de temps, de sérénité et d’efficacité." />
+
+  <link rel="icon" type="image/png" href="LOGO.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --sage: #6b8577;
+      --navy: #2c4254;
+      --gold: #c8a574;
+      --cream: #f5f3ef;
+      --dark: #1a1a1a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Montserrat", sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    h1, h2, h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0,0,0,.05);
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: auto;
+      padding: 1rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-nav img {
+      height: 60px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-size: .95rem;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: .3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      padding-top: 120px;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, var(--cream), #e8e5df);
+    }
+
+    .hero-container {
+      max-width: 1400px;
+      margin: auto;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      line-height: 1.1;
+    }
+
+    .hero-title span {
+      color: var(--sage);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--gold);
+      margin: 1rem 0 2rem;
+    }
+
+    .hero-description {
+      font-size: 1.05rem;
+      color: #555;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: .3s;
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #1f3244;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border: 2px solid var(--sage);
+      color: var(--sage);
+      margin-left: 1rem;
+    }
+
+    .btn-secondary:hover {
+      background: var(--sage);
+      color: #fff;
+    }
+
+    /* CARD */
+    .visual-card {
+      background: #fff;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.1);
+      text-align: center;
+    }
+
+    .visual-icon {
+      width: 110px;
+      height: 110px;
+      margin: auto;
+      background: linear-gradient(135deg, var(--sage), #8fa397);
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: #fff;
+      margin-bottom: 2rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 1.5rem;
+    }
+
+    .stat strong {
+      font-size: 2.2rem;
+      display: block;
+      color: var(--navy);
+      font-family: "Cormorant Garamond", serif;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 7rem 3rem;
+      background: #fff;
+    }
+
+    section:nth-child(even) {
+      background: var(--cream);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 800px;
+      margin: auto auto 4rem;
+    }
+
+    .section-header span {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold);
+      font-size: .85rem;
+    }
+
+    .section-header h2 {
+      font-size: 3rem;
+      margin: 1rem 0;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      color: #fff;
+      padding: 4rem 3rem 2rem;
+    }
+
+    footer p {
+      opacity: .7;
+      max-width: 600px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: .85rem;
+      opacity: .5;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .btn-secondary {
+        margin: 1rem 0 0;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo-nav">
-                <img src="/mnt/user-data/uploads/logover.svg" alt="DocEtVita">
-            </div>
-            <ul class="nav-links">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#expertise">Mon Expertise</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="accueil" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">La vie sans <span class="highlight">paperasse</span></h1>
-                <p class="hero-subtitle">Moins de papier, plus de liberté</p>
-                <p class="hero-description">
-                    Libérez-vous de l'administratif et concentrez-vous sur l'essentiel : vos patients. 
-                    Forte de mon expérience en tant que responsable administrative dans le secteur de l'optique, 
-                    je comprends les défis quotidiens des professionnels de santé.
-                </p>
-                <div class="cta-buttons">
-                    <a href="#contact" class="btn btn-primary">Prendre rendez-vous</a>
-                    <a href="#services" class="btn btn-secondary">Découvrir mes services</a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="visual-card">
-                    <div class="visual-icon">📋</div>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-number">100%</div>
-                            <div class="stat-label">Dématérialisé</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">24/7</div>
-                            <div class="stat-label">Disponibilité</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">+50%</div>
-                            <div class="stat-label">Temps gagné</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">∞</div>
-                            <div class="stat-label">Sérénité</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<nav>
+  <div class="nav-container">
+    <div class="logo-nav">
+      <img src="logover.svg" alt="DocEtVita" />
+    </div>
+    <ul class="nav-links">
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <!-- Expertise Section -->
-    <section id="expertise" class="expertise">
-        <div class="expertise-container">
-            <div class="expertise-content fade-in">
-                <h2>Une expérience terrain au service de votre pratique</h2>
-                <p>
-                    Ancienne responsable administrative dans le domaine de l'optique, j'ai géré au quotidien 
-                    l'ensemble des aspects administratifs d'un établissement de santé : gestion des dossiers patients, 
-                    relations avec les mutuelles, planification, facturation et conformité réglementaire.
-                </p>
-                <p>
-                    Cette expérience m'a permis de développer une compréhension approfondie des enjeux spécifiques 
-                    aux professionnels de santé : la nécessité d'une organisation rigoureuse, la gestion des relations 
-                    avec les organismes de santé, et surtout, l'importance de libérer du temps pour se consacrer aux patients.
-                </p>
-                <p>
-                    Aujourd'hui, je mets cette expertise à votre service pour vous accompagner dans la modernisation 
-                    et l'optimisation de votre gestion administrative.
-                </p>
-            </div>
-            <div class="expertise-highlight fade-in">
-                <h3>Mon expertise en optique</h3>
-                <ul class="expertise-list">
-                    <li>Gestion complète des dossiers patients et tiers payant</li>
-                    <li>Relations avec les mutuelles et organismes de santé</li>
-                    <li>Organisation et optimisation des flux administratifs</li>
-                    <li>Maîtrise des logiciels métier du secteur santé</li>
-                    <li>Conformité RGPD et réglementations santé</li>
-                    <li>Formation continue aux évolutions du secteur</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+<section id="accueil" class="hero">
+  <div class="hero-container">
+    <div>
+      <h1 class="hero-title">La vie sans <span>paperasse</span></h1>
+      <p class="hero-subtitle">Moins de papier, plus de liberté</p>
+      <p class="hero-description">
+        Externalisation administrative dédiée aux professionnels de santé.
+        Gagnez du temps, de la sérénité et concentrez-vous sur vos patients.
+      </p>
+      <a href="#contact" class="btn btn-primary">Prendre rendez-vous</a>
+      <a href="#services" class="btn btn-secondary">Voir les services</a>
+    </div>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="section-header fade-in">
-            <div class="section-label">Mes Services</div>
-            <h2 class="section-title">Des solutions adaptées à vos besoins</h2>
-            <p class="section-description">
-                Un accompagnement sur-mesure pour alléger votre charge administrative.
-            </p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card fade-in">
-                <div class="service-icon">🗂️</div>
-                <h3 class="service-title">Gestion Administrative</h3>
-                <p class="service-description">
-                    Prise en charge complète de votre administration quotidienne : courriers, 
-                    relances, classement et archivage numérique.
-                </p>
-                <ul class="service-features">
-                    <li>Traitement du courrier et emails</li>
-                    <li>Gestion des dossiers administratifs</li>
-                    <li>Archivage numérique sécurisé</li>
-                </ul>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">📅</div>
-                <h3 class="service-title">Gestion d'Agenda</h3>
-                <p class="service-description">
-                    Organisation optimale de vos rendez-vous et de votre planning professionnel 
-                    pour une meilleure gestion de votre temps.
-                </p>
-                <ul class="service-features">
-                    <li>Prise de rendez-vous et rappels</li>
-                    <li>Optimisation du planning</li>
-                    <li>Gestion des annulations et reports</li>
-                </ul>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">💰</div>
-                <h3 class="service-title">Facturation & Suivi</h3>
-                <p class="service-description">
-                    Gestion rigoureuse de vos factures, relances et relations avec les 
-                    mutuelles et organismes de santé.
-                </p>
-                <ul class="service-features">
-                    <li>Établissement des factures</li>
-                    <li>Suivi des paiements et relances</li>
-                    <li>Gestion tiers payant et mutuelles</li>
-                </ul>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">📞</div>
-                <h3 class="service-title">Accueil Téléphonique</h3>
-                <p class="service-description">
-                    Permanence téléphonique professionnelle pour ne manquer aucun appel 
-                    et offrir un service optimal à vos patients.
-                </p>
-                <ul class="service-features">
-                    <li>Réception et filtrage des appels</li>
-                    <li>Prise de messages détaillés</li>
-                    <li>Renseignements aux patients</li>
-                </ul>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">🔄</div>
-                <h3 class="service-title">Digitalisation</h3>
-                <p class="service-description">
-                    Accompagnement dans votre transition numérique pour moderniser 
-                    vos processus et gagner en efficacité.
-                </p>
-                <ul class="service-features">
-                    <li>Numérisation de vos documents</li>
-                    <li>Mise en place d'outils digitaux</li>
-                    <li>Formation aux nouveaux outils</li>
-                </ul>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">📊</div>
-                <h3 class="service-title">Reporting</h3>
-                <p class="service-description">
-                    Suivi de votre activité avec des tableaux de bord clairs 
-                    pour piloter votre cabinet en toute sérénité.
-                </p>
-                <ul class="service-features">
-                    <li>Tableaux de bord mensuels</li>
-                    <li>Statistiques d'activité</li>
-                    <li>Analyses et recommandations</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+    <div class="visual-card">
+      <div class="visual-icon">📋</div>
+      <div class="stats">
+        <div class="stat"><strong>100%</strong>Dématérialisé</div>
+        <div class="stat"><strong>24/7</strong>Disponibilité</div>
+        <div class="stat"><strong>+50%</strong>Temps gagné</div>
+        <div class="stat"><strong>∞</strong>Sérénité</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="contact-container">
-            <div class="section-header">
-                <div class="section-label">Contact</div>
-                <h2 class="section-title">Discutons de votre projet</h2>
-                <p class="section-description">
-                    Contactez-moi pour échanger sur vos besoins et découvrir comment 
-                    je peux vous accompagner au quotidien.
-                </p>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h3>Prenons contact</h3>
-                    <div class="info-item">
-                        <div class="info-icon">📧</div>
-                        <div class="info-content">
-                            <h4>Email</h4>
-                            <p>contact@docetvita.fr</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon">📱</div>
-                        <div class="info-content">
-                            <h4>Téléphone</h4>
-                            <p>Sur rendez-vous</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon">🕒</div>
-                        <div class="info-content">
-                            <h4>Disponibilité</h4>
-                            <p>Lun - Ven : 9h00 - 18h00</p>
-                        </div>
-                    </div>
-                </div>
-                <form class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Nom et Prénom</label>
-                        <input type="text" id="name" placeholder="Dr. Jean Dupont" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email professionnel</label>
-                        <input type="email" id="email" placeholder="jean.dupont@cabinet.fr" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Votre message</label>
-                        <textarea id="message" placeholder="Parlez-moi de vos besoins..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Envoyer le message</button>
-                </form>
-            </div>
-        </div>
-    </section>
+<footer>
+  <p><strong>DocEtVita</strong> — Externalisation administrative santé</p>
+  <div class="footer-bottom">
+    © 2026 DocEtVita — Tous droits réservés
+  </div>
+</footer>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div>
-                <div class="footer-logo">DocEtVita</div>
-                <p class="footer-description">
-                    Votre partenaire de confiance pour l'externalisation administrative 
-                    des professionnels de santé. Simplifiez votre quotidien, 
-                    concentrez-vous sur l'essentiel.
-                </p>
-            </div>
-            <div class="footer-section">
-                <h4>Navigation</h4>
-                <ul class="footer-links">
-                    <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#expertise">Mon Expertise</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Légal</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Mentions Légales</a></li>
-                    <li><a href="#">Politique de Confidentialité</a></li>
-                    <li><a href="#">CGV</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 DocEtVita. Tous droits réservés.</p>
-        </div>
-    </footer>
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      document.querySelector(link.getAttribute("href"))
+        ?.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+</script>
 
-    <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Form submission
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Merci pour votre message ! Je vous contacterai très prochainement.');
-            this.reset();
-        });
-
-        // Navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
-            } else {
-                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
-            }
-        });
-    </script>
 </body>
 </html>
